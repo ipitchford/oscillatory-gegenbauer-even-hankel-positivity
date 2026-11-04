@@ -1,8 +1,8 @@
-# AI index: positivity and recurrence formulas for oscillatory Gegenbauer Hankel determinants (v0.1.0-candidate)
+# AI index: positivity and recurrence formulas for oscillatory Gegenbauer Hankel determinants (v0.2.0-candidate)
 
 Machine-oriented map of claims, evidence and limits. Human readers should start with
 [README.md](README.md) and the paper [manuscript.pdf](manuscript.pdf) (LaTeX source [manuscript.tex](manuscript.tex)).
-Version DOI 10.5281/zenodo.23933929; concept DOI 10.5281/zenodo.23933928.
+Version DOI 10.5281/zenodo.23941908 (0.2.0-candidate; 0.1.0-candidate was 10.5281/zenodo.23933929); concept DOI 10.5281/zenodo.23933928.
 
 ## Notation
 
@@ -32,10 +32,12 @@ LZ26 = Lyu and Zhou, arXiv:2607.19797v1. KR25 = Kounchev and Render, arXiv:2505.
 ## Prior claim
 
 A ResearchGate preprint by J. M. Ashfaque dated 24 July 2026 (https://www.researchgate.net/publication/410769119)
-claims the LZ26 recurrence formulas (C6, C7) via a discrete Painleve IV identification. Its Proposition 3.1 fails as
-printed: a parity argument shows it fails for every odd size and no constant index shift or phase repairs it
-([competing_claim_audit.md](competing_claim_audit.md); manuscript Section 9). This release claims the first complete
-proofs known to it of C6 and C7, not the first claim. As far as read, the preprint does not state C1 or C5.
+claims the LZ26 recurrence formulas (C6, C7) via a discrete Painleve IV identification. Its change of variables is correct.
+Its Proposition 3.1 fails as printed, at odd sizes (parity) and at even sizes, and no constant index shift or phase repairs it;
+the difference formula in its proof is correct with the standard last-column shift. It gives no construction or degree
+computation for the LZ26 polynomials ([competing_claim_audit.md](competing_claim_audit.md),
+[prior_claim_check.py](prior_claim_check.py); manuscript Section 9). This release claims the first complete
+proofs known to it of C6 and C7, not the first claim. The preprint does not state C1 or C5.
 
 ## Verification artefacts
 

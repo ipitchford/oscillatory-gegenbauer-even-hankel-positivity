@@ -4,8 +4,8 @@ title: "Positivity and recurrence formulas for oscillatory Gegenbauer Hankel det
 type: software
 authors:
   - name: Anonymous
-version: 0.1.0-candidate
-doi: 10.5281/zenodo.23933929
+version: 0.2.0-candidate
+doi: 10.5281/zenodo.23941908
 date-released: 2026-11-04
 repository-code: "https://github.com/ipitchford/oscillatory-gegenbauer-even-hankel-positivity"
 url: "https://evidencepress.org/releases/oscillatory-gegenbauer-even-hankel-positivity/"
@@ -14,8 +14,8 @@ license:
   - MIT
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.23933929
-    description: "Version DOI (0.1.0-candidate)"
+    value: 10.5281/zenodo.23941908
+    description: "Version DOI (0.2.0-candidate)"
   - type: doi
     value: 10.5281/zenodo.23933928
     description: "Concept DOI (all versions)"
@@ -26,4 +26,4 @@ keywords:
   - Gegenbauer weight
   - orthogonal polynomials
   - Bessel functions
-abstract: "For alpha > -1, every even-size Hankel determinant of the complex weight (1-t^2)^alpha e^{ixt} on [-1,1] is strictly positive for every real frequency x, extending the alpha = 0 theorem of Celsus, Deano, Huybrechs and Iserles (2022). So the even-degree orthogonal polynomials used in complex Gaussian quadrature for oscillatory integrals always exist; odd-size determinants have infinitely many real zeros. Every complex zero of every determinant is simple. The same large-frequency expansion proves the formal degree conjectures of Milovanovic, Cvetkovic and Marjanovic (2008) and gives complete proofs of Conjectures 2.5 and 2.7 of Lyu and Zhou (2026). A ResearchGate preprint of J. M. Ashfaque (24 July 2026) earlier claimed those recurrence formulas; its Proposition 3.1 fails as printed. Existence only; not node distinctness or conditioning. Unrefereed candidate; internal AI-assisted review only. Text CC0-1.0; code MIT."
+abstract: "For alpha > -1, every even-size Hankel determinant of the complex weight (1-t^2)^alpha e^{ixt} on [-1,1] is strictly positive for every real frequency x, extending the alpha = 0 theorem of Celsus, Deano, Huybrechs and Iserles (2022). So the even-degree orthogonal polynomials used in complex Gaussian quadrature for oscillatory integrals always exist; odd-size determinants have infinitely many real zeros. Every complex zero of every determinant is simple. The same large-frequency expansion proves the formal degree conjectures of Milovanovic, Cvetkovic and Marjanovic (2008) and gives complete proofs of Conjectures 2.5 and 2.7 of Lyu and Zhou (2026). A ResearchGate preprint of J. M. Ashfaque (24 July 2026) earlier claimed those recurrence formulas; its change of variables is correct, but its Proposition 3.1 fails as printed and it does not compute the polynomial degrees. Existence only; not node distinctness or conditioning. Unrefereed candidate; internal AI-assisted review only. Text CC0-1.0; code MIT."

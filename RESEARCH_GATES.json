@@ -1,6 +1,6 @@
 {
  "schemaVersion": "1.0",
- "provenance": "Compiled 4 November 2026 for release 0.1.0-candidate from the dated novelty report (novelty_report.md, 2 November 2026), the competing-claim audit (competing_claim_audit.md) and the reference retrieval of 4 November 2026. It documents the scrutiny performed, not historical priority. No new literature search was run at release preparation.",
+ "provenance": "Compiled 4 November 2026 for release 0.1.0-candidate and updated for 0.2.0-candidate from the dated novelty report (novelty_report.md, 2 November 2026), the competing-claim audit (competing_claim_audit.md) and the reference retrieval of 4 November 2026. It documents the scrutiny performed, not historical priority. No new literature search was run at release preparation.",
  "contributionMap": [
   {
    "claim": "Theorem 1.1: D_{2r}^{(alpha)}(x) > 0 for all r >= 1, alpha > -1 and real x.",
@@ -65,9 +65,9 @@
      "query": "Lyu-Zhou Conjectures 2.5 and 2.7; discrete Painleve IV oscillatory Gegenbauer recurrence coefficients"
     }
    ],
-   "closestPriorWork": "Ashfaque, ResearchGate preprint of 24 July 2026: claims the formulas via a discrete Painleve IV identification; its Proposition 3.1 fails as printed (competing_claim_audit.md; manuscript Section 9)",
+   "closestPriorWork": "Ashfaque, ResearchGate preprint of 24 July 2026: claims the formulas via a discrete Painleve IV identification; its change of variables is correct, its Proposition 3.1 fails as printed and it gives no degree computation (competing_claim_audit.md; prior_claim_check.py; manuscript Section 9)",
    "verdict": "collision",
-   "resolution": "Earlier public claim disclosed in the abstract, introduction, Section 9, README and release page. This release claims the first complete proofs known to it, not the first claim; the positivity theorem and the 2008 degree results are not claimed there as far as read."
+   "resolution": "Earlier public claim disclosed in the abstract, introduction, Section 9, README and release page. This release claims the first complete proofs known to it, not the first claim; the positivity theorem and the 2008 degree results are not claimed there."
   },
   {
    "claim": "Corollary 8.3: critical length j_{7/2,1} for span{x^j cos x, x^j sin x : 0 <= j <= 3}, conditional on the unrefereed rank-three result of Kounchev and Render (2025).",
@@ -102,8 +102,8 @@
   {
    "citation": "Ashfaque, ResearchGate preprint of 24 July 2026",
    "usedFor": "Prior claim and its Proposition 3.1",
-   "readWhat": "Full text as posted",
-   "date": "2026-11-02",
+   "readWhat": "Full text (six pages), reread for 0.2.0-candidate",
+   "date": "2026-11-04",
    "evidenceLocator": "competing_claim_audit.md; manuscript Section 9"
   }
  ],

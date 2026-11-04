@@ -34,8 +34,10 @@
 
 \title{Positivity and recurrence formulas for\texorpdfstring{\\}{}oscillatory Gegenbauer Hankel determinants}
 \author{Anonymous}
-\date{Version 0.1.0-candidate, 4 November 2026. Archived at Zenodo,
-DOI \href{https://doi.org/10.5281/zenodo.23933929}{10.5281/zenodo.23933929}
+\date{Version 0.2.0-candidate, 4 November 2026 (corrects the description
+of an earlier preprint in version 0.1.0; the mathematics is unchanged).
+Archived at Zenodo,
+DOI \href{https://doi.org/10.5281/zenodo.23941908}{10.5281/zenodo.23941908}
 (all versions: \href{https://doi.org/10.5281/zenodo.23933928}{10.5281/zenodo.23933928}).}
 
 \begin{document}
@@ -167,11 +169,12 @@ recurrence formulas follow from a discrete Painlev\'e~IV and
 tau-function identification. It therefore precedes this paper as a
 public claim on Conjectures~2.5 and 2.7. As we explain in
 Section~\ref{sec:scope}, the determinant formula on which that
-derivation rests (its Proposition~3.1) fails as printed, so we regard
-the proofs here as the first complete ones known to us for those
-conjectures, not as the first claim. As far as our reading of that
-preprint goes, it does not state Theorem~\ref{thm:main} or the 2008
-degree results. These algebraic results use the endpoint asymptotics and
+derivation rests (its Proposition~3.1) fails as printed, and the
+preprint does not derive the degrees of the Lyu--Zhou polynomials, so we
+regard the proofs here as the first complete ones known to us for those
+conjectures, not as the first claim. Its transformation of the Lyu--Zhou
+difference equations is correct. It does not state Theorem~\ref{thm:main}
+or the 2008 degree results. These algebraic results use the endpoint asymptotics and
 determinant identities; they do not require Theorem~\ref{thm:main}.
 The positivity theorem additionally uses the exponent-zero base case
 and continuation.
@@ -1415,16 +1418,21 @@ Theorem~\ref{thm:main}. This comparison rules out the direct
 identification; it does not claim to exclude every deeper connection.
 
 \paragraph{The earlier claim.}
-Ashfaque \cite{Ashfaque2026} (ResearchGate, 24 July 2026) states in its
-abstract and Proposition~3.1 that the symbolic recurrence formulas
-conjectured by Lyu and Zhou follow from a discrete Painlev\'e~IV and
-tau-function identification. Our description is based on a full reading
-of that six-page document on 2 November 2026; the host later blocked
-automated access, so readers should consult the original. In its
-notation the weight is $(1-x^2)^{\lambda-1/2}e^{\ii\zeta x}$ with
-$J_{\lambda-1}(\zeta)=0$, the recurrence is
-$xP_n=P_{n+1}+\ii\alpha_nP_n+\beta_nP_{n-1}$ with real $\alpha_n$, and
-it sets $u_n=\zeta\alpha_n-(2n+2\lambda-1)$. Proposition~3.1 defines
+Ashfaque \cite{Ashfaque2026} (ResearchGate, 24 July 2026) uses the weight
+$(1-x^2)^{\lambda-1/2}e^{\ii\zeta x}$ with $J_{\lambda-1}(\zeta)=0$ and the
+recurrence $xP_n=P_{n+1}+\ii\alpha_nP_n+\beta_nP_{n-1}$ (for real $\zeta$
+the $\alpha_n$ are real). It restates the two first-order difference
+equations of Lyu and Zhou for $\alpha_n,\beta_n$ and, with
+$u_n=\zeta\alpha_n-(2n+2\lambda-1)$ and $v_n=\zeta^2\beta_n$, rewrites them
+as a system it identifies as an asymmetric discrete Painlev\'e~IV
+equation. We checked both parts: the difference equations hold to the
+working precision at several Bessel zeros, and the change of variables is
+exactly correct. Its abstract and Section~3 then state that the symbolic
+forms conjectured by Lyu and Zhou arise as rational solutions of that
+system, by identifying tau-functions $\tau_n\propto D_n$ with the
+Lyu--Zhou polynomials $X_n$.
+
+That last step is not established. Proposition~3.1 defines
 $D_n^{(1)}=\det[\mu_{i+j+1}]_{i,j=0}^{n-1}$, shifting every moment
 index, and asserts
 \begin{equation}\label{eq:ashfaqueA}
@@ -1436,20 +1444,40 @@ Section~\ref{sec:continuation} shows that $D_n^{(1)}$ is purely imaginary
 when $n$ is odd, while $D_n$ is real. At $n=1$,
 $\mu_1/\mu_0=\ii J_{\lambda+1}(\zeta)/J_\lambda(\zeta)=2\ii\lambda/\zeta$ at
 every nonzero real zero of $J_{\lambda-1}$ (where $J_\lambda(\zeta)\ne0$,
-since adjacent Bessel functions have no common nonzero zero), by the three-term Bessel recurrence. The
-right side of \eqref{eq:ashfaqueA} is then $2\ii\lambda-(2\lambda+1)$,
-which is not real when $\lambda\ne0$, whereas the left side is real. At
-$\lambda=0$ the two sides are $-1$ and $0$ respectively, using
-Lyu and Zhou's initial value $\alpha_1=1/\zeta$. The failure is not
-an index slip: the right side alternates between imaginary and real as
-the parity of $n$ changes, so no fixed index shift or constant phase
-repairs it for all $n$. Moreover the subleading coefficient of a monic orthogonal
-polynomial comes from a single last-column shift, and $\alpha_n$ is a
-difference of two such ratios. A corrected argument along those lines
-may exist; we make no judgement about one. The arguments in this
-manuscript do not use that proposition or the claimed resolution, but
-the earlier public claim is part of the priority record and we do not
-claim to be first to assert these formulas.
+since adjacent Bessel functions have no common nonzero zero), by the
+three-term Bessel recurrence. The right side of \eqref{eq:ashfaqueA} is
+then $2\ii\lambda-(2\lambda+1)$, which is not real when $\lambda\ne0$,
+whereas the left side is real. At $\lambda=0$ the two sides are $-1$ and
+$0$ respectively, using Lyu and Zhou's initial value $\alpha_1=1/\zeta$.
+Formula \eqref{eq:ashfaqueA} also fails at even $n$, where both sides are
+real (for example at $\lambda=5/4$ and the first positive zero of
+$J_{1/4}$, $n=2$ gives $-6.778$ on the right against $-5.431$). Since the ratio
+$D_n^{(1)}/D_n$ alternates between imaginary and real with $n$, no fixed index
+shift or constant phase repairs \eqref{eq:ashfaqueA}. The preprint's proof
+of Proposition~3.1 instead writes $\alpha_n$ as the difference
+$D^{(1)}_{n+1}/D_{n+1}-D^{(1)}_n/D_n$. With $D^{(1)}_n$ read as the single
+last-column shift that gives the subleading coefficient of a monic
+orthogonal polynomial, and with a factor $-\ii$, that difference is the
+standard correct formula for $\alpha_n$; the displayed statement does not
+match it. The formula for $v_n$ in Proposition~3.1 is the standard
+identity $\beta_n=D_{n+1}D_{n-1}/D_n^2$.
+
+Even so corrected, the identity expresses $\alpha_n,\beta_n$ through
+Hankel determinants, which are Bessel-function expressions in $\zeta$,
+not polynomials in $\zeta^2$. The preprint calls the $\tau_n$ monic
+polynomials and identifies them with the $X_n$, but gives no construction
+of polynomials of the stated degrees and no degree or leading-coefficient
+computation, which is the substance of Conjectures~2.5 and 2.7. Its
+bilinear equation (9), read with $\tau_n=D_n$, also fails: the Toda
+identity gives $D_\zeta^2\tau_n\cdot\tau_n=-2\tau_{n+1}\tau_{n-1}$, and the
+stated coefficient $2n(2\lambda+2n-1)/\zeta^2$ differs in sign and size
+(the preprint leaves the normalisation of $\tau_n$ unspecified). Its
+Sections~4 and 5, on oscillatory Jacobi weights and a continuum limit, are
+not used or assessed here. The preprint remarks that the Hankel
+determinants admit real zeros in $\zeta$; Theorem~\ref{thm:main} shows that
+this happens only for odd sizes. The arguments in this manuscript do not
+use that preprint, but the earlier public claim is part of the priority
+record and we do not claim to be first to assert these formulas.
 
 This is a bounded comparison, not an exhaustive priority determination.
 In particular, no claim of historical firstness is inferred solely
@@ -1690,8 +1718,7 @@ finite-verification snapshot dated 7 September 2026, accessed
 \bibitem{Ashfaque2026}
 J.~M. Ashfaque,
 \emph{On the discrete Painlev\'e IV structure of oscillatory Gegenbauer
-recurrence coefficients}, preprint dated 24 July 2026, accessed
-2 November 2026.
+recurrence coefficients}, preprint dated 24 July 2026, 6 pages.
 \href{https://www.researchgate.net/publication/410769119_On_the_Discrete_Painleve_IV_Structure_of_Oscillatory_Gegenbauer_Recurrence_Coefficients}
 {\nolinkurl{https://www.researchgate.net/publication/410769119}}.
 

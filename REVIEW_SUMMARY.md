@@ -18,3 +18,7 @@
 ## Not done (considered extensions)
 
 Distinct quadrature nodes with nonzero weights, interlacing of odd-size zeros, critical lengths for n ≥ 4, and an independent certificate replacing the Kounchev–Render input were considered. None was tractable within this revision, and none is claimed.
+
+## Version 0.2.0 correction (4 November 2026)
+
+The description of the Ashfaque preprint was rechecked against its full text. Version 0.2.0 credits its correct change of variables and the correct difference formula in its proof, adds that its Proposition 3.1 also fails at even sizes and that it gives no degree computation, and adds `prior_claim_check.py`. No proof in this paper changed.

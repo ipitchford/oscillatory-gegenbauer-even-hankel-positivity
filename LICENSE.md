@@ -1,7 +1,7 @@
 # Licences
 
 - Text, mathematical content, data and figures in this package (manuscript, README, notes, JSON results): CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/).
-- Code (`verify.py`): MIT Licence.
+- Code (`verify.py`, `prior_claim_check.py`): MIT Licence.
 
 MIT Licence
 

@@ -1,0 +1,109 @@
+{
+  "title": "Positivity and recurrence formulas for oscillatory Gegenbauer Hankel determinants",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "description": "<p><strong>Unrefereed research candidate.</strong> In one sentence: for the complex weight (1-t<sup>2</sup>)<sup>&alpha;</sup>e<sup>ixt</sup> on [-1,1], every even-size Hankel determinant is strictly positive for every exponent &alpha; &gt; -1 and every real frequency x, so the even-degree orthogonal polynomials used in complex Gaussian quadrature for oscillatory integrals always exist.</p><p>Gaussian-type rules for highly oscillatory integrals can be built from polynomials orthogonal with respect to a complex weight. Such a polynomial of degree N exists only when the N-by-N Hankel determinant of the moments is nonzero, and with a complex weight this can fail. Celsus, Dea&ntilde;o, Huybrechs and Iserles (2022) proved even-size positivity for the flat weight (&alpha; = 0). This paper extends it to every &alpha; &gt; -1 by continuation in &alpha;, using a Pearson identity (adjacent determinants never vanish together, and every complex zero is simple) and a large-frequency expansion with constants uniform on compact exponent intervals. Odd-size determinants have infinitely many real zeros. The same expansion proves the formal degree and leading-coefficient conjectures of Milovanovi&#263;, Cvetkovi&#263; and Marjanovi&#263; (2008) and gives complete proofs of the recurrence-coefficient formulas in Conjectures 2.5 and 2.7 of Lyu and Zhou (2026), in their stated ranges. An exact Bessel-Jacobi determinant identity, combined with an unrefereed preprint of Kounchev and Render, gives the critical length j<sub>7/2,1</sub> for the span of x<sup>j</sup>cos x, x<sup>j</sup>sin x, 0 &le; j &le; 3.</p><p><strong>Prior claim.</strong> A ResearchGate preprint by J. M. Ashfaque dated 24 July 2026 (https://www.researchgate.net/publication/410769119) claims that the Lyu-Zhou recurrence formulas follow from a discrete Painlev&eacute; IV identification. Its Proposition 3.1 fails as printed (a parity argument; see competing_claim_audit.md). This release claims the first complete proofs known to it of Conjectures 2.5 and 2.7, not the first claim; as far as read, the preprint does not state the positivity theorem or the 2008 degree results.</p><p>Limits: existence only (no claim about distinct quadrature nodes, nonzero weights or conditioning); the general Carnicer-Mainar-Pe&ntilde;a critical-length conjecture remains open; the n = 3 corollary depends on an unrefereed preprint. The archive contains the manuscript (PDF and LaTeX source), verify.py (mpmath 1.3.0 and SymPy 1.14.0 numerical and exact checks with a negative control, valid under python -O) and its retained output, the novelty report, the competing-claim audit, a public review record and SHA-256 sums. Assurance: written proofs; the finite checks test formulas and conventions, not the statements for all sizes; internal AI-assisted review only (not human peer review, independent reproduction or formal verification). Creator: Anonymous. Text CC0-1.0; code MIT.</p>",
+  "creators": [
+    {
+      "name": "Anonymous"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-zero",
+  "version": "0.1.0-candidate",
+  "publication_date": "2026-11-04",
+  "keywords": [
+    "Hankel determinants",
+    "oscillatory integrals",
+    "complex Gaussian quadrature",
+    "Gegenbauer weight",
+    "orthogonal polynomials",
+    "Bessel functions",
+    "recurrence coefficients",
+    "critical length"
+  ],
+  "notes": "Code (verify.py and the CI workflow) is MIT; prose, manuscript and data are CC0-1.0. Bibliographic records in refs/ are factual metadata from Crossref and arXiv.",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/ipitchford/oscillatory-gegenbauer-even-hankel-positivity/tree/v0.1.0-candidate",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://evidencepress.org/releases/oscillatory-gegenbauer-even-hankel-positivity/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "10.1093/imatrm/tnab005",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.2298/PIM0898049M",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1090/tran/7809",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.3934/dcds.2014.34.883",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1007/s00211-008-0209-z",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1137/1.9781611975123",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1080/10652469.2021.1923707",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1515/form.2011.160",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1007/s13398-022-01365-8",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1007/s00220-018-3259-9",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1007/s00440-005-0428-5",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "arXiv:2607.19797",
+      "relation": "references",
+      "scheme": "arxiv"
+    },
+    {
+      "identifier": "arXiv:1101.4624",
+      "relation": "references",
+      "scheme": "arxiv"
+    },
+    {
+      "identifier": "arXiv:2505.09964",
+      "relation": "references",
+      "scheme": "arxiv"
+    }
+  ],
+  "doi": "10.5281/zenodo.23933929"
+}

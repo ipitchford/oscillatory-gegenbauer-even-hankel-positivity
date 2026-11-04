@@ -1,0 +1,1699 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{microtype}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,
+ pdftitle={Positivity and recurrence formulas for oscillatory Gegenbauer Hankel determinants},
+ pdfauthor={Anonymous}}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\dd}{\,\mathrm{d}}
+\newcommand{\D}{D}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\wt}{\widetilde}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\spanop}{span}
+\allowdisplaybreaks[2]
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+
+\title{Positivity and recurrence formulas for\texorpdfstring{\\}{}oscillatory Gegenbauer Hankel determinants}
+\author{Anonymous}
+\date{Version 0.1.0-candidate, 4 November 2026. Archived at Zenodo,
+DOI \href{https://doi.org/10.5281/zenodo.23933929}{10.5281/zenodo.23933929}
+(all versions: \href{https://doi.org/10.5281/zenodo.23933928}{10.5281/zenodo.23933928}).}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For $\alpha>-1$, consider the Hankel determinants of the complex weight
+$(1-t^2)^\alpha e^{\ii xt}$ on $[-1,1]$. We prove that every even-size
+determinant is strictly positive for every real frequency $x$. The argument
+extends the published exponent-zero theorem by continuation in $\alpha$.
+Its two ingredients are a Pearson-identity proof that adjacent determinants
+never vanish together, and a large-frequency expansion uniform on compact
+exponent intervals. The first ingredient also implies that every complex
+zero of every determinant is simple. Odd-size determinants have infinitely
+many real zeros, and their first endpoint correction is computed explicitly.
+The same expansion proves two formal polynomial-degree conjectures stated
+in 2008 and gives complete proofs of two recurrence-coefficient conjectures
+stated in 2026. An earlier 2026 preprint claimed to derive those
+recurrence formulas; we show that its key determinant formula fails as
+printed, and our proofs do not use it. An exact
+Bessel--Jacobi determinant identity transfers the even-size result to
+spherical-Bessel derivative determinants. Combined with the published
+rank-three result (an unrefereed preprint), it proves the critical-length conjecture for the
+eight-dimensional space spanned by $x^j\cos x,x^j\sin x$, $0\le j\le3$.
+The general critical-length conjecture remains unresolved here.
+\end{abstract}
+
+\noindent\textbf{Keywords.} Hankel determinant; oscillatory orthogonality;
+Gegenbauer weight; Bessel function; critical length; endpoint asymptotics.
+
+\section{Introduction and main result}
+
+For $\alpha>-1$ and $z\in\C$, define
+\begin{equation}\label{eq:definitions}
+ \mu_j^{(\alpha)}(z)=\int_{-1}^1t^j(1-t^2)^\alpha e^{\ii zt}\dd t,
+ \qquad
+ D_N^{(\alpha)}(z)=
+ \det[\mu_{i+j}^{(\alpha)}(z)]_{i,j=0}^{N-1},\qquad D_0^{(\alpha)}=1.
+\end{equation}
+For fixed real $\alpha>-1$, these are entire functions of the frequency.
+The determinants are real and even on the real axis. At frequency zero the measure is
+positive, so every determinant is positive. At nonzero frequency the
+measure is complex and ordinary positive-measure orthogonality no longer
+ensures that the determinants are nonzero.
+
+Our principal statement is the following.
+
+\begin{theorem}\label{thm:main}
+For every integer $r\ge1$, every real $\alpha>-1$, and every $x\in\R$,
+\begin{equation}\label{eq:main}
+                         D_{2r}^{(\alpha)}(x)>0.
+\end{equation}
+Consequently, the monic orthogonal polynomial of each even degree exists
+uniquely for $(1-t^2)^\alpha e^{\ii xt}$ on $[-1,1]$, at every real frequency.
+\end{theorem}
+
+\paragraph{Why this matters, in plain terms.}
+Integrals of rapidly oscillating functions, such as
+$\int_{-1}^1f(t)(1-t^2)^\alpha e^{\ii xt}\dd t$, are expensive to compute
+by ordinary rules once the frequency $x$ is large. One family of
+efficient methods builds Gaussian-type rules from polynomials that are
+``orthogonal'' with respect to the complex weight itself. Because that
+weight is complex, such polynomials need not exist: the polynomial of
+degree $N$ exists exactly when the Hankel determinant $D_N$ is nonzero.
+Theorem~\ref{thm:main} says that, for every Gegenbauer exponent and every
+real frequency, this never fails in even degree. It is an existence
+statement only; it does not by itself show that the resulting quadrature
+nodes are distinct or well conditioned. For this numerical context see
+Deaño and Huybrechs \cite{DeanoHuybrechs2009}, Asheim, Deaño, Huybrechs
+and Wang \cite{ADHW2014}, and the monograph \cite{DHI2017}.
+
+\paragraph{How the paper is organised.}
+Section~\ref{sec:pearson} proves that two consecutive determinants never
+vanish together, so all zeros are simple. Section~\ref{sec:endpoint}
+derives large-frequency expansions with constants uniform in the
+exponent, reducing everything to one-variable endpoint integrals.
+Section~\ref{sec:continuation} combines these to prove
+Theorem~\ref{thm:main}. Sections~\ref{sec:degree}--\ref{sec:recurrence}
+use the same expansions for the 2008 degree conjectures and the 2026
+recurrence conjectures. Section~\ref{sec:consequences} records
+consequences and limits, Section~\ref{sec:scope} the checks and the
+priority record, and the appendix the Bessel--Jacobi identity. Readers
+interested only in the main theorem need Sections~2--4.
+
+This does not assert existence of the entire orthogonal-polynomial sequence
+at every frequency. Each odd-size determinant has infinitely many positive
+real zeros; see Corollary~\ref{cor:oddzeros}. The distinction between even
+and odd degree is therefore necessary.
+
+The case $\alpha=0$ is the even-degree existence theorem of
+Celsus, Dea\~no, Huybrechs and Iserles
+\cite[Theorem~4.3]{Celsus2022}. We use that published result as a base
+case. The extension to all $\alpha>-1$ follows from a continuation
+argument. First, a Pearson identity rules out simultaneous vanishing of
+adjacent determinants. The Toda identity then rules out multiple zeros.
+Second, a uniform endpoint expansion shows that an even-size determinant
+is positive at every sufficiently large real frequency, with a common
+threshold on each compact exponent interval. Real zeros consequently
+cannot be created during continuation, enter through frequency zero, or
+arrive from infinity.
+
+The oscillatory Gegenbauer family was studied by Milovanovi\'c,
+Cvetkovi\'c and Marjanovi\'c \cite{MCM2008}. Their parameter is
+$\lambda=\alpha+\tfrac12$. They prove existence of the entire sequence
+when $\lambda>-\tfrac12$ is rational and the frequency is a nonzero zero
+of $J_{\lambda-1}$. They also conjecture degrees of two families of
+polynomial Hankel expressions. Lyu and Zhou \cite{LyuZhou2026} revisit
+these expressions, propose leading-coefficient products, and retain special
+parameter and frequency restrictions in their existence assumptions.
+Sections~\ref{sec:degree} and \ref{sec:numerator} prove both formal degree
+statements and give their leading coefficients. In the shifted case,
+the generic degree has two exceptional specialisations in the admissible
+real parameter interval.
+
+Section~\ref{sec:recurrence} then proves all the formulas in
+\cite[Conjectures~2.5 and 2.7]{LyuZhou2026}, retaining their precise
+index ranges. Those conjectures assert that the recurrence coefficients
+are given by explicit rational expressions in certain monic polynomials
+$X_j,Y_j$ of degree $j$, which Lyu and Zhou list only for low indices.
+What is proved here is therefore: an explicit construction of such
+polynomials for every index, the degree and leading-coefficient facts
+that make them monic of the stated degree, and the stated identities.
+Our polynomials coincide with those listed by Lyu and Zhou at the
+indices they give (Section~\ref{sec:recurrence}).
+
+\paragraph{Prior claim.} A preprint by Ashfaque \cite{Ashfaque2026},
+posted on ResearchGate on 24 July 2026, claims that the Lyu--Zhou
+recurrence formulas follow from a discrete Painlev\'e~IV and
+tau-function identification. It therefore precedes this paper as a
+public claim on Conjectures~2.5 and 2.7. As we explain in
+Section~\ref{sec:scope}, the determinant formula on which that
+derivation rests (its Proposition~3.1) fails as printed, so we regard
+the proofs here as the first complete ones known to us for those
+conjectures, not as the first claim. As far as our reading of that
+preprint goes, it does not state Theorem~\ref{thm:main} or the 2008
+degree results. These algebraic results use the endpoint asymptotics and
+determinant identities; they do not require Theorem~\ref{thm:main}.
+The positivity theorem additionally uses the exponent-zero base case
+and continuation.
+
+The exact Fourier--Gegenbauer Wronskian object also occurs in
+Dimitrov and Xu \cite{DimitrovXu2019}. Their positive-definiteness results
+for Fourier Wronskians are not pointwise positivity statements. Theorem
+\ref{thm:main} concerns pointwise positivity at every even size. An exact
+atomic example in Section~\ref{sec:consequences} illustrates why positive
+definiteness, or symmetry of a positive underlying measure, does not
+itself prove this conclusion.
+
+Jacobi-type kissing polynomials are also studied by Barhoumi
+\cite{Barhoumi2021} in a regime where degree and frequency grow together.
+Those large-degree asymptotic existence results have a different scope
+from the all-finite-even-degree, all-real-frequency assertion above.
+
+An appendix supplies an exact identity with signed derivative Hankel
+determinants of spherical-Bessel functions. This identity is derived from
+the standard unitary orbital integral and the Jacobi law for random
+projection compressions; no separate novelty claim is made for that
+classical representation. It gives all even-size nonvanishing conditions
+in the critical-length problem of Carnicer, Mainar and Pe\~na
+\cite{CMP2023}. Combined with Kounchev and Render
+\cite[Corollary~21]{KounchevRender2025}, it settles the case $n=3$ of that
+problem; this corollary is conditional on their result, which is an
+unrefereed preprint. Higher odd-size first-zero comparisons are not proved here.
+
+The priority discussion in Section~\ref{sec:scope} records the bounded
+literature comparison, including an earlier competing claim. The
+mathematical statements below do not depend on treating a search result
+as proof of historical priority.
+
+\section{A Pearson identity and simple zeros}\label{sec:pearson}
+
+Fix a real $\alpha>-1$. For a polynomial $p$, write
+\[
+ L_z(p)=\int_{-1}^1p(t)(1-t^2)^\alpha e^{\ii zt}\dd t.
+\]
+Integrating the derivative of
+$R(t)(1-t^2)^{\alpha+1}e^{\ii zt}$ gives
+\begin{equation}\label{eq:pearson}
+ L_z\!\left((1-t^2)R'
+       +[\ii z(1-t^2)-2(\alpha+1)t]R\right)=0.
+\end{equation}
+The endpoint values vanish because $\alpha+1>0$, and all terms are
+integrable. This identity holds for every polynomial $R$ and every
+complex frequency.
+
+\begin{lemma}\label{lem:adjacent}
+There is no $z\in\C\setminus\{0\}$ and no integer $n\ge1$ for which
+\[
+                 D_n^{(\alpha)}(z)=D_{n+1}^{(\alpha)}(z)=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix a frequency and suppress $\alpha,z$ from the notation. If an adjacent
+pair vanishes, choose the least such $n$. Then $D_{n-1}\ne0$; put
+$d=n-1$. Nonsingularity of the size-$d$ moment matrix provides a unique
+monic polynomial $p$ of degree $d$ satisfying
+\begin{equation}\label{eq:orthstart}
+                         L(pq)=0\qquad(\deg q\le d-1).
+\end{equation}
+For $d=0$, this means $p=1$ and the condition is empty. The monic
+triangular basis change to $1,t,\ldots,t^{d-1},p$ gives
+$D_{d+1}=D_dL(p^2)$. Hence $L(p^2)=0$, and $p$ is orthogonal to every
+polynomial of degree at most $d$.
+
+In the monic basis $1,t,\ldots,t^{d-1},p,tp$, the size-$(d+2)$ Gram
+matrix has the form
+\[
+ \begin{pmatrix}
+  H_d&0&v\\
+  0&0&c\\
+  v^{T}&c&e
+ \end{pmatrix},\qquad c=L(tp^2).
+\]
+The Schur complement of $H_d$ therefore gives
+$D_{d+2}=-D_dc^2$. Since $D_{d+2}=0$ and $D_d\ne0$, we have $c=0$.
+The polynomial $tp$ is monic of degree $d+1$, so $p$ is orthogonal to
+all polynomials of degree at most $d+1$.
+
+Suppose inductively that this orthogonality holds through degree
+$M\ge d+1$. Set $k=M-d-1\ge0$ and substitute $R=t^kp^2$ in
+\eqref{eq:pearson}. Every term except
+$-\ii zL(t^{k+2}p^2)$ has the form $L(pq)$ with $\deg q\le M$.
+For example, the largest degree in the term involving $p'$ is
+$\deg(t^{k+2}p')=k+2+d-1=M$. Since $z\ne0$, it follows that
+$L(t^{k+2}p^2)=0$. The polynomial $t^{k+2}p$ is monic of degree
+$M+1$, which extends the orthogonality by one degree. Induction shows
+that $L(pq)=0$ for every polynomial $q$.
+
+Approximate the continuous function $\overline{p(t)}e^{-\ii zt}$
+uniformly on $[-1,1]$ by complex polynomials. Passage to the limit gives
+\[
+                       \int_{-1}^1|p(t)|^2(1-t^2)^\alpha\dd t=0,
+\]
+contradicting the fact that $p$ is monic.
+\end{proof}
+
+\begin{remark}\label{rem:jacobi}
+The same proof applies to the nonsymmetric Jacobi weight
+$(1-t)^a(1+t)^b e^{\ii zt}$, $a,b>-1$. Its Pearson bracket is
+$\ii z(1-t^2)+(b-a)-(a+b+2)t$. The extra constant term does not change
+the degree induction. The positivity theorem uses symmetry and is
+asserted only for $a=b$.
+\end{remark}
+
+Because $(\mu_j^{(\alpha)})'=\ii\mu_{j+1}^{(\alpha)}$, the
+Desnanot--Jacobi identity for consecutive derivative Hankel determinants
+gives
+\begin{equation}\label{eq:toda}
+ D_N D_N''-(D_N')^2=-D_{N-1}D_{N+1},\qquad N\ge1.
+\end{equation}
+Here and below frequency derivatives are taken with $\alpha$ fixed.
+The sign can already be read at $N=1$:
+$\mu_0\mu_0''-(\mu_0')^2=-\mu_0\mu_2+\mu_1^2=-D_2$.
+
+\begin{corollary}\label{cor:simple}
+Every complex zero of every $D_N^{(\alpha)}$, $N\ge1$, is simple.
+\end{corollary}
+
+\begin{proof}
+If $D_N=D_N'=0$ at a nonzero frequency, \eqref{eq:toda} forces one of
+the adjacent determinants to vanish, contrary to Lemma~\ref{lem:adjacent}.
+Frequency zero is not a zero, because its moment matrix is positive
+definite.
+\end{proof}
+
+For later normalisation, the zero-frequency value is
+\begin{equation}\label{eq:selbergzero}
+ D_N^{(\alpha)}(0)=2^{N(2\alpha+N)}
+ \prod_{j=0}^{N-1}
+ \frac{j!\,\Gamma(\alpha+j+1)^2}
+      {\Gamma(2\alpha+N+j+1)}>0.
+\end{equation}
+This is the Selberg integral after $t=2s-1$, or equivalently the product
+of the monic Jacobi polynomial norms. Positivity alone in the preceding
+argument does not require this evaluation.
+
+\section{Endpoint expansions, uniform in the exponent}\label{sec:endpoint}
+
+Let
+\begin{equation}\label{eq:Laguerreproduct}
+ L_m(\alpha)=\prod_{j=0}^{m-1}j!\,\Gamma(\alpha+j+1),\qquad L_0=1.
+\end{equation}
+Andr\'eief's identity yields
+\begin{equation}\label{eq:andreief}
+ D_N^{(\alpha)}(x)=\frac1{N!}
+ \int_{[-1,1]^N}\Delta(t)^2\prod_{j=1}^N(1-t_j^2)^\alpha
+                    e^{\ii x\sum_jt_j}\dd t_1\cdots\dd t_N,
+\end{equation}
+where $\Delta(t)=\prod_{i<j}(t_j-t_i)$.
+
+The whole large-frequency analysis rests on one elementary fact about
+one-variable endpoint integrals, which we prove first with constants that
+are uniform in the exponent. Throughout, $K\subset(-1,\infty)$ is a compact
+interval, and $O_K(\cdot)$ denotes a bound whose constant depends on $K$
+and on the displayed fixed integers, but not on $\alpha\in K$ or on $x$.
+
+\begin{lemma}[uniform endpoint lemma]\label{lem:watson}
+Fix $\delta\in(0,1]$, a smooth cutoff $\chi$ on $[0,\infty)$ with
+$\chi=1$ on $[0,\delta/3]$ and $\chi=0$ on $[2\delta/3,\infty)$, an
+integer $q\ge0$, and a function $h(s,\alpha)$, smooth in
+$s\in[0,\delta]$, whose $s$-derivatives of every order are bounded and
+jointly continuous on $[0,\delta]\times K$. Then for every integer $M\ge1$
+and $x\ge1$,
+\begin{equation}\label{eq:watson}
+ \int_0^\delta s^{\alpha+q}h(s,\alpha)\chi(s)e^{-\ii xs}\dd s
+ =\sum_{m=0}^{M-1}\frac{\partial_s^m h(0,\alpha)}{m!}\,
+   \Gamma(\alpha+q+m+1)(\ii x)^{-(\alpha+q+m+1)}
+ +O_K\bigl(x^{-(q+M)}\bigr),
+\end{equation}
+with the principal branch of $(\ii x)^{-c}=x^{-c}e^{-\ii\pi c/2}$.
+The coefficients are continuous in $\alpha\in K$. The same holds with
+$e^{+\ii xs}$ and $(-\ii x)$ in place of $e^{-\ii xs}$ and $(\ii x)$.
+\end{lemma}
+
+\begin{proof}
+Taylor's theorem gives
+$h(s,\alpha)=\sum_{m<M}h_m(\alpha)s^m+s^MR(s,\alpha)$ with
+$h_m=\partial_s^mh(0,\alpha)/m!$, where every $s$-derivative of $R$ is
+bounded on $[0,\delta]\times K$. Put $n=q+M$ and
+$g(s)=s^{\alpha+q+M}R(s,\alpha)\chi(s)$. For $k\le n$ the derivative
+$g^{(k)}$ is a finite sum of terms bounded by a constant times
+$s^{\alpha+q+M-k}$, and $\alpha+q+M-k\ge\alpha>-1$. Hence every
+$g^{(k)}$, $k\le n$, is integrable on $[0,\delta]$ with
+$\int_0^\delta|g^{(k)}|\le C_K$, since
+$\int_0^\delta s^{\alpha}\dd s\le\delta^{\alpha+1}/(\alpha+1)$ is
+bounded on $K$. For $k<n$, $g^{(k)}(s)=O(s^{\alpha+1})\to0$ as
+$s\to0$, and $g^{(k)}(\delta)=0$. Integrating by parts $n$ times
+therefore gives $\bigl|\int_0^\delta g\,e^{-\ii xs}\dd s\bigr|\le
+C_Kx^{-n}$.
+
+It remains to treat $\int_0^\infty s^\beta\chi(s)e^{-\ii xs}\dd s$ with
+$\beta=\alpha+q+m$. Insert the factor $e^{-\varepsilon s}$,
+$\varepsilon>0$. Then
+\[
+ \int_0^\infty s^\beta e^{-(\varepsilon+\ii x)s}\dd s
+ =\Gamma(\beta+1)(\varepsilon+\ii x)^{-\beta-1}
+\]
+and the difference from the cutoff integral is
+$\int_0^\infty s^\beta(1-\chi(s))e^{-(\varepsilon+\ii x)s}\dd s$.
+The factor $1-\chi$ vanishes near zero. Choose one integer
+$L\ge q+M$ with $L>\max_{\alpha\in K,\,m<M}(\alpha+q+m+1)$, and
+integrate by parts $L$ times; for $\varepsilon>0$ all boundary terms
+vanish. By the Leibniz rule the $L$th derivative of
+$s^\beta(1-\chi(s))e^{-\varepsilon s}$ is a sum of compactly supported
+cutoff-derivative terms and terms
+$\varepsilon^js^{\beta-L+j}e^{-\varepsilon s}$ on $s\ge\delta/3$, and
+$\varepsilon^js^je^{-\varepsilon s}\le C_j$. Hence it is dominated,
+uniformly in $\varepsilon\in(0,1]$ and $\alpha\in K$, by an integrable
+multiple of $s^{\beta-L}$ on $[\delta/3,\infty)$. This difference is therefore
+$O_K(x^{-L})$ uniformly in $\varepsilon$. Letting $\varepsilon\to0$ by
+dominated convergence on the cutoff side gives
+$\int_0^\infty s^\beta\chi e^{-\ii xs}\dd s
+=\Gamma(\beta+1)(\ii x)^{-\beta-1}+O_K(x^{-L})$, with $L$ as large as
+required. Summing over $m<M$ proves \eqref{eq:watson}. Continuity of the
+coefficients follows from continuity of $\Gamma$ and of $h_m$. When
+$\alpha>0$ the remainder bound is weaker than the last retained term;
+this is harmless because $M$ may be taken as large as required.
+\end{proof}
+
+\begin{lemma}[moment splitting]\label{lem:momentsplit}
+Fix $\delta\in(0,1/2]$ and smooth functions $\chi_+,\chi_0,\chi_-$ on
+$[-1,1]$, with values in $[0,1]$ and sum one, where $\chi_+(t)=\chi(1-t)$,
+$\chi_-(t)=\chi(1+t)$, and $\chi_0$ is supported in
+$[-1+\delta/3,1-\delta/3]$. For each $j\ge0$ write
+$\mu_j^{(\alpha)}=\mu_j^++\mu_j^0+\mu_j^-$ according to this partition. Then,
+for real $x\ge1$, $\mu_j^0(x)=O_K(x^{-L})$ for every $L$, while
+$e^{-\ii x}\mu_j^+(x)$ and $e^{\ii x}\mu_j^-(x)$ have expansions of the form
+\eqref{eq:watson} to every order, with coefficients continuous in
+$\alpha\in K$.
+\end{lemma}
+
+\begin{proof}
+On the support of $\chi_0$ the function $t^j(1-t^2)^\alpha\chi_0(t)$ is
+smooth, compactly supported in $(-1,1)$, and has all derivatives
+bounded on $K$; repeated integration by parts gives the first claim.
+Near $t=1$, put $t=1-s$. Then
+$t^j(1-t^2)^\alpha e^{\ii xt}
+ =e^{\ii x}s^\alpha\,(1-s)^j(2-s)^\alpha e^{-\ii xs}$, and
+$h(s,\alpha)=(1-s)^j(2-s)^\alpha$ satisfies the hypotheses of
+Lemma~\ref{lem:watson} on $[0,\delta]$, because $2-s\ge3/2$ there.
+The endpoint $t=-1$ is symmetric.
+\end{proof}
+
+\begin{proposition}\label{prop:corners}
+Fix $N\ge1$ and a compact interval $K\subset(-1,\infty)$. For real
+$x\ge1$, $D_N^{(\alpha)}(x)$ is a sum over endpoint allocations
+$k+l=N$ of terms $e^{\ii(k-l)x}F_{k,l}(x,\alpha)$ plus $O_K(x^{-L})$
+for any prescribed $L$. Each $F_{k,l}$ has an asymptotic expansion in
+powers $x^{-N(\alpha+1)-m}$, $m=0,1,2,\ldots$, to every order, with
+coefficients continuous in $\alpha\in K$ and remainders uniform for
+$\alpha\in K$. The first nonzero term of $e^{\ii(k-l)x}F_{k,l}$ is
+\begin{equation}\label{eq:corner}
+ 2^{N\alpha+2kl}L_k(\alpha)L_l(\alpha)
+ x^{-E_k}
+ \exp\!\left(\ii(k-l)
+             \left[x-\frac\pi2(\alpha+N)\right]\right),
+ \quad E_k=N\alpha+k^2+l^2.
+\end{equation}
+The frequency derivative $\partial_xD_N^{(\alpha)}$ has the
+termwise-differentiated expansion, with the same uniformity.
+\end{proposition}
+
+\begin{proof}
+\emph{Reduction to one-variable integrals.} Expanding $\Delta(t)^2$ into
+monomials in \eqref{eq:andreief} expresses $D_N^{(\alpha)}$ as a fixed finite
+linear combination of products $\prod_{i=1}^N\mu_{a_i}^{(\alpha)}$
+(this is just the Leibniz expansion of the Hankel determinant). Insert
+the splitting of Lemma~\ref{lem:momentsplit} into each factor. Any
+product containing a factor $\mu^0$ is $O_K(x^{-L})$, since every
+$|\mu_j^\pm|$ is bounded by $\int_{-1}^1(1-t^2)^\alpha\dd t$, which is
+bounded on $K$. Collect the remaining products according to how many
+factors carry $+$ and how many carry $-$. Equivalently, for a fixed
+allocation in which $k$ coordinates carry $\chi_+$ and $l$ carry
+$\chi_-$, the corresponding term of \eqref{eq:andreief} is
+\[
+ \binom Nk\frac1{N!}\int\Delta(t)^2
+   \prod_{i\le k}(1-t_i^2)^\alpha\chi_+(t_i)e^{\ii xt_i}
+   \prod_{i>k}(1-t_i^2)^\alpha\chi_-(t_i)e^{\ii xt_i}\dd t .
+\]
+Put $t_i=1-s_i$ for $i\le k$ and $t_i=-1+s_i'$ for $i>k$. The square
+$\Delta(t)^2$ becomes the \emph{polynomial}
+$\Delta(s)^2\Delta(s')^2\prod_{i\le k<j}(2-s_i-s_j')^2$. All other
+factors are products of one-variable functions of the type in
+Lemma~\ref{lem:momentsplit}. Expanding this polynomial into monomials
+therefore writes the allocation term exactly as
+$e^{\ii(k-l)x}F_{k,l}$, where $F_{k,l}$ is a finite sum of products of
+one-variable integrals covered by Lemma~\ref{lem:watson}. No
+multivariable Taylor remainder occurs, and the uniformity and
+continuity statements follow by multiplying finitely many uniform
+one-variable expansions.
+
+\emph{The leading term.} A monomial of total degree $d$ in the
+$s,s'$ variables contributes, by \eqref{eq:watson}, terms of order
+$x^{-N(\alpha+1)-d-m}$, $m\ge0$. The polynomial
+$\Delta(s)^2\Delta(s')^2$ is homogeneous of degree
+$k(k-1)+l(l-1)$ and is the lowest-degree part of the full polynomial;
+its coefficient multiplies $2^{2kl}$ from the cross factor at
+$s=s'=0$. The constant terms of the smooth factors are
+$h(0,\alpha)=2^\alpha$ per coordinate, giving $2^{N\alpha}$. The order is
+therefore $N(\alpha+1)+k(k-1)+l(l-1)=E_k$, and the leading
+coefficient is obtained by replacing each one-variable integral by its
+first term in \eqref{eq:watson}. That replacement is the same as
+evaluating
+\begin{equation}\label{eq:Laguerreintegral}
+ \int_{[0,\infty)^m}\Delta(u)^2\prod_{j=1}^m u_j^\alpha
+                 e^{-s\sum_j u_j}\dd u
+ =m!L_m(\alpha)s^{-m(\alpha+m)},\qquad \Re s>0,
+\end{equation}
+at the boundary values $s=\pm\ii x$, where the right-hand side is read
+as the analytic continuation from $\Re s>0$. Indeed, both sides of
+\eqref{eq:Laguerreintegral} are sums of the same products of Gamma
+values times powers of $s$, and \eqref{eq:watson} supplies exactly these
+products with $s=\ii x$ (respectively $-\ii x$). At $s=1$, Andr\'eief
+reduces the integral to $m!\det[\Gamma(\alpha+i+j+1)]$. Factoring
+$\Gamma(\alpha+i+1)$ from row $i$ leaves $(\alpha+i+1)_j$, a monic
+polynomial of degree $j$ in $i$. Its determinant is the Vandermonde
+determinant at $0,\ldots,m-1$, namely $\prod_{j=0}^{m-1}j!$. Homogeneity
+gives the formula for general $s$. The boundary values supply the
+phases $e^{\mp\ii\pi m(\alpha+m)/2}$. The factor $\binom Nk$ and $1/N!$
+cancel the two factorials in \eqref{eq:Laguerreintegral}. The phase
+simplifies using $k(\alpha+k)-l(\alpha+l)=(k-l)(\alpha+N)$, giving
+\eqref{eq:corner}. This coefficient is nonzero, so it is the first
+nonzero term.
+
+\emph{The derivative.} For the one-variable integrals
+$I_q(x)=\int s^{\alpha+q}h\chi e^{-\ii xs}\dd s$, differentiation under the
+integral gives $I_q'=-\ii I_{q+1}$. Applying Lemma~\ref{lem:watson} to
+both sides and using $\Gamma(p+1)=p\Gamma(p)$ shows that the expansion of
+$I_q'$ is the termwise derivative of that of $I_q$; the conjugate phase
+is analogous. The product rule, applied to each allocation term
+including its phase $e^{\ii(k-l)x}$, then gives the uniform expansion of
+$\partial_xD_N^{(\alpha)}$ as the termwise derivative, without
+differentiating an uncontrolled remainder.
+
+\emph{Joint continuity.} By dominated convergence, every
+$\mu_j^{(\alpha)}(x)$ and its $x$-derivatives are jointly continuous in
+$(\alpha,x)\in(-1,\infty)\times\R$; hence so are $D_N^{(\alpha)}(x)$ and
+$\partial_xD_N^{(\alpha)}(x)$. This is used in Section~\ref{sec:continuation}.
+\end{proof}
+
+\begin{corollary}\label{cor:eventail}
+For $r\ge1$, uniformly on compact $K\subset(-1,\infty)$,
+\begin{equation}\label{eq:eventail}
+ D_{2r}^{(\alpha)}(x)=C_{r,\alpha}
+ x^{-2r(\alpha+r)}\bigl(1+O_K(x^{-2})\bigr),
+ \qquad
+ C_{r,\alpha}=2^{2r(\alpha+r)}L_r(\alpha)^2>0.
+\end{equation}
+In particular, there is a common $R$ such that
+$D_{2r}^{(\alpha)}(x)>0$ for every $\alpha\in K$ and $x\ge R$.
+\end{corollary}
+
+\begin{proof}
+Write $k=r+s$, $l=r-s$ in \eqref{eq:corner}. Then
+$E_k=2r(\alpha+r)+2s^2$. The balanced allocation $k=l=r$ is the
+unique leading term, and its phase is one. Its first correction
+cancels between the conjugate endpoint groups; the explicit calculation
+below also verifies this cancellation. Every unbalanced allocation is
+smaller by at least $x^{-2}$. The coefficient is continuous and strictly
+positive on $K$, so the uniform expansion implies a common positivity
+threshold.
+\end{proof}
+
+The odd case needs a first correction for the degree calculations later.
+
+\begin{proposition}\label{prop:oddexpansion}
+Let $r\ge0$, set $N=2r+1$, and put
+\begin{align}
+ E&=(2r+1)\alpha+2r^2+2r+1,&
+ \theta&=x-\frac{\pi\alpha}{2},\label{eq:oddparameters}\\
+ A_{r,\alpha}&=2^{(2r+1)\alpha+2r(r+1)+1}
+                  L_r(\alpha)L_{r+1}(\alpha),&
+ T_{r,\alpha}&=\frac{\alpha(\alpha+2r+1)}2+r(r+1).
+ \label{eq:oddconstants}
+\end{align}
+Then, uniformly on compact exponent intervals,
+\begin{equation}\label{eq:oddexpansion}
+ D_{2r+1}^{(\alpha)}(x)=(-1)^r A_{r,\alpha}x^{-E}
+ \left[\sin\theta+\frac{T_{r,\alpha}}x\cos\theta+O_K(x^{-2})\right].
+\end{equation}
+The bracket remainder can be differentiated once with error
+$O_K(x^{-2})$.
+\end{proposition}
+
+\begin{proof}
+The leading allocations are $(k,l)=(r+1,r)$ and $(r,r+1)$.
+Their phases in \eqref{eq:corner} are conjugate and add to
+$2(-1)^r\sin\theta$. The next allocations are down by $x^{-4}$.
+In the scaled endpoint variables, the linear correction to the smooth
+amplitude at an allocation $(k,l)$ is
+\begin{equation}\label{eq:linearcorner}
+ -\frac1x\left[
+    \left(\frac\alpha2+l\right)\sum_{j=1}^k u_j
+   +\left(\frac\alpha2+k\right)\sum_{j=1}^l v_j\right].
+\end{equation}
+Differentiate \eqref{eq:Laguerreintegral} in $s$. For the group with
+$e^{-\ii\sum u_j}$, the normalised endpoint moment of $\sum u_j$ is
+$-\ii k(\alpha+k)$; the conjugate group has moment
+$\ii l(\alpha+l)$. For $(k,l)=(r+1,r)$, the relative correction
+is $\ii T_{r,\alpha}/x$, where
+\[
+ T_{r,\alpha}=
+ \left(\frac\alpha2+r\right)(r+1)(\alpha+r+1)
+ -\left(\frac\alpha2+r+1\right)r(\alpha+r).
+\]
+Expansion gives \eqref{eq:oddconstants}. Adding the conjugate allocation
+proves \eqref{eq:oddexpansion}. The remainder and its differentiated
+version follow from Proposition~\ref{prop:corners}. For the balanced
+even allocation, the two terms in \eqref{eq:linearcorner} instead
+cancel, as used in Corollary~\ref{cor:eventail}.
+\end{proof}
+
+\section{Continuation and the real zeros}\label{sec:continuation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For real frequency, reflection of the integration variable gives
+$\overline{\mu_j^{(\alpha)}(x)}=(-1)^j\mu_j^{(\alpha)}(x)$.
+The row and column sign exponents of a size-$N$ determinant sum to
+$N(N-1)$, an even number. Thus $D_N^{(\alpha)}(x)$ is real; the same
+calculation shows it is even in $x$.
+
+Fix $2r$ and a target exponent $\alpha_*>-1$. Let $K$ be the closed
+interval joining $0$ and $\alpha_*$. Positive definiteness at frequency
+zero, compactness, and continuity give $\varepsilon>0$ such that
+$D_{2r}^{(\alpha)}(x)>0$ for all $\alpha\in K$ and $|x|\le\varepsilon$.
+Corollary~\ref{cor:eventail} gives $R>\varepsilon$ with the same
+positivity for $|x|\ge R$.
+
+Define
+\[
+ S=\{\alpha\in K:D_{2r}^{(\alpha)}(x)>0
+                       \text{ for every }x\in[\varepsilon,R]\}.
+\]
+The exponent-zero theorem \cite[Theorem~4.3]{Celsus2022} states that
+for every $n\ge0$ and every real frequency the monic kissing polynomial
+of degree $2n$ for $e^{\ii\omega t}$ on $[-1,1]$ exists; it is
+unconditional, with no asymptotic restriction. It gives
+$0\in S$. Indeed, it proves nonvanishing, and positivity follows by
+continuity from $x=0$. The set $S$ is relatively open, since a positive
+continuous function on this compact frequency interval has a positive
+minimum.
+
+It is also relatively closed. If $\alpha_j\in S$ tends to $\alpha\in K$,
+then $D_{2r}^{(\alpha)}\ge0$ on $[\varepsilon,R]$. A zero would lie
+strictly inside the interval because its endpoints are already in
+positive regions. At such an interior minimum the frequency derivative
+would also vanish, contradicting Corollary~\ref{cor:simple}. Hence
+$\alpha\in S$. Connectedness gives $S=K$, and evenness completes the
+proof for every real frequency.
+\end{proof}
+
+\begin{corollary}\label{cor:oddzeros}
+For every real $\alpha>-1$ and every $r\ge0$, the function
+$D_{2r+1}^{(\alpha)}$ has infinitely many positive real zeros, all simple.
+For all sufficiently large integers $m$, exactly one zero lies near
+$x_m=m\pi+\pi\alpha/2$, and it equals
+\begin{equation}\label{eq:oddzerolocation}
+                      x_m-\frac{T_{r,\alpha}}{x_m}+O(m^{-2}).
+\end{equation}
+This local label need not be the global index of that zero.
+\end{corollary}
+
+\begin{proof}
+The leading sine in \eqref{eq:oddexpansion} has alternating signs at its
+successive extrema. The differentiated expansion gives a derivative
+of fixed nonzero sign in a small neighbourhood of each sufficiently
+large phase zero, and the function is bounded away from zero outside
+these neighbourhoods. This proves existence and uniqueness there.
+Substituting $x=x_m+\delta$ in \eqref{eq:oddexpansion} gives
+$\delta=-T_{r,\alpha}/x_m+O(m^{-2})$. Simplicity of every zero,
+including the remaining ones, is Corollary~\ref{cor:simple}.
+\end{proof}
+
+The Toda identity and Theorem~\ref{thm:main} also give a direct
+consequence between successive odd-size zeros:
+\begin{equation}\label{eq:logconcavity}
+ \frac{\mathrm{d}^2}{\mathrm{d}x^2}
+          \log|D_{2r+1}^{(\alpha)}(x)|
+ =-\frac{D_{2r}^{(\alpha)}(x)D_{2r+2}^{(\alpha)}(x)}
+          {D_{2r+1}^{(\alpha)}(x)^2}<0.
+\end{equation}
+This strict logarithmic concavity does not by itself locate the first
+positive zero.
+
+\section{The degree of the Hankel polynomials}\label{sec:degree}
+
+Let $u$ be a polynomial variable. For a parameter $\lambda$, set
+$P_{-1}=0$, $P_0=1$, $P_1=-2\lambda$, and
+\begin{equation}\label{eq:Prec}
+ P_{k+2}=-(k+2\lambda+1)P_{k+1}-uP_k-kuP_{k-1},\qquad k\ge0.
+\end{equation}
+Define
+\begin{equation}\label{eq:Hdef}
+ H_n(u;\lambda)=\det[P_{i+j}(u;\lambda)]_{i,j=0}^{n-1},\qquad H_0=1.
+\end{equation}
+These are precisely the polynomials in \cite[pp.~50--53]{MCM2008},
+with $u=\zeta^2$. Put
+\begin{equation}\label{eq:Kdef}
+ a=\lambda+\frac12,\qquad
+ K_r(a)=\prod_{j=0}^{r-1}j!(a)_j,\qquad K_0=1.
+\end{equation}
+
+\begin{theorem}\label{thm:Hdegree}
+For every real $\lambda>-\tfrac12$ and every $n\ge0$,
+\begin{equation}\label{eq:Hdegree}
+                       \deg_u H_n=\left\lfloor\frac{n^2}{4}\right\rfloor.
+\end{equation}
+The leading coefficients $\ell_n(\lambda)$ are
+\begin{align}
+ \ell_{2r}(\lambda)&=(-1)^r2^{2r(r-1)}K_r(a)^2,
+                    &&r\ge1,\label{eq:Hevenlead}\\
+ \ell_{2r+1}(\lambda)&=2^{2r^2}K_r(a)K_{r+1}(a),
+                    &&r\ge0.\label{eq:Hoddlead}
+\end{align}
+The degree upper bound and these coefficient formulas hold as
+polynomial identities for every complex $\lambda$. Equality in the
+degree holds whenever the displayed coefficient is nonzero.
+\end{theorem}
+
+\begin{proof}
+First assume $\lambda>-\tfrac12$ is real and set
+$\alpha=\lambda-\tfrac12$. The Fourier--Bessel integral is
+\begin{equation}\label{eq:muBessel}
+ \mu_0^{(\alpha)}(\zeta)=
+ \sqrt\pi\,\Gamma\left(\lambda+\frac12\right)
+                    \left(\frac2\zeta\right)^\lambda J_\lambda(\zeta).
+\end{equation}
+Let $\zeta$ run through an unbounded sequence of positive zeros of
+$J_{\lambda-1}$. At these frequencies the Bessel recurrence gives
+$\mu_1=2\ii\lambda\mu_0/\zeta$. The Pearson identity for a monomial
+gives
+\[
+ \ii\zeta\mu_{k+2}
+   =k\mu_{k-1}-(k+2\lambda+1)\mu_{k+1}+\ii\zeta\mu_k.
+\]
+Comparison with \eqref{eq:Prec} proves
+\begin{equation}\label{eq:Pmoment}
+ \mu_j^{(\alpha)}(\zeta)
+ =\mu_0^{(\alpha)}(\zeta)(\ii\zeta)^{-j}P_j(\zeta^2;\lambda).
+\end{equation}
+Factoring rows and columns gives the exact identity
+\begin{equation}\label{eq:DH}
+ D_n^{(\alpha)}(\zeta)=
+ \mu_0^{(\alpha)}(\zeta)^n(\ii\zeta)^{-n(n-1)}H_n(\zeta^2;\lambda).
+\end{equation}
+This step assumes neither existence of an orthogonal-polynomial
+sequence nor rationality of $\lambda$.
+
+Write $\theta=\zeta-\pi\alpha/2$ and
+$B=2^{\alpha+1}\Gamma(\alpha+1)$. The large-argument Bessel expansion
+at zeros of $J_{\lambda-1}$ gives
+\begin{equation}\label{eq:phasezeros}
+ \cos\theta=O(\zeta^{-1}),\qquad
+ \sin^2\theta=1+O(\zeta^{-2}),\qquad
+ \mu_0^{(\alpha)}(\zeta)
+ =B\zeta^{-\alpha-1}\bigl(\sin\theta+O(\zeta^{-1})\bigr).
+\end{equation}
+In particular $\mu_0$ is nonzero along all sufficiently large members
+of the sequence.
+
+For $n=2r$, insert \eqref{eq:eventail} and \eqref{eq:phasezeros} into
+\eqref{eq:DH}. Since $\ii^{n(n-1)}=(-1)^r$ and
+$(\sin\theta)^{2r}\to1$,
+\[
+ \frac{H_{2r}(\zeta^2;\lambda)}{\zeta^{2r^2}}
+ \longrightarrow
+ (-1)^r\frac{2^{2r(\alpha+r)}L_r(\alpha)^2}{B^{2r}}
+ =(-1)^r2^{2r(r-1)}K_r(a)^2.
+\]
+For $n=2r+1$, the leading odd term is
+$(-1)^rA_{r,\alpha}\zeta^{-E}\sin\theta$.
+Again $\ii^{n(n-1)}=(-1)^r$, so the two signs cancel and
+\[
+ \frac{H_{2r+1}(\zeta^2;\lambda)}{\zeta^{2r(r+1)}}
+ \longrightarrow
+ \frac{A_{r,\alpha}}{B^{2r+1}}
+ =2^{2r^2}K_r(a)K_{r+1}(a).
+\]
+Each limit is finite and nonzero because $a>0$.
+Since $H_n$ is a polynomial in $u$, its growth along the unbounded
+sequence $u=\zeta^2$ determines its degree and leading coefficient:
+a higher degree would give an unbounded normalised sequence, and a
+lower degree would give limit zero.
+
+Finally, every coefficient of $H_n$ is a polynomial in $\lambda$.
+The coefficients above the stated degree vanish on the real interval
+$(-\tfrac12,\infty)$ and therefore vanish identically. The leading
+coefficient identities extend in the same way.
+\end{proof}
+
+Rearranging the products in \eqref{eq:Hevenlead}--\eqref{eq:Hoddlead}
+gives the equivalent formulas
+\begin{align}
+ \ell_{2r}&=(-1)^r2^{r(r-1)}
+   \prod_{j=1}^{r-1}[j(2\lambda+2j-1)]^{2(r-j)},\label{eq:LYeven}\\
+ \ell_{2r+1}&=2^{r^2}
+   \prod_{j=1}^{r}[j(2\lambda+2j-1)]^{2(r-j)+1}.\label{eq:LYodd}
+\end{align}
+These are the products proposed in \cite[Remark~2.6]{LyuZhou2026}.
+The degree statement is the first conjecture on p.~53 of
+\cite{MCM2008}.
+
+\section{The shifted-numerator degree}\label{sec:numerator}
+
+For $n\ge1$, define the shifted-last-column determinant
+\begin{equation}\label{eq:Htilde}
+ \wt H_n=\det[P_{i+j+\mathbf{1}_{\{j=n-1\}}}]_{i,j=0}^{n-1},
+ \qquad
+ V_n=\wt H_nH_{n+1}-\wt H_{n+1}H_n.
+\end{equation}
+Thus the last column uses $P_n,\ldots,P_{2n-1}$; all earlier columns
+are unchanged. The prime used for this expression in \cite{MCM2008}
+denotes a shifted determinant, not a parameter derivative.
+
+\begin{theorem}\label{thm:Vdegree}
+As a formal polynomial over $\Q(\lambda)$,
+\begin{equation}\label{eq:Vdegree}
+                            \deg_u V_n=\frac{n(n+1)}2.
+\end{equation}
+The coefficient of $u^{n(n+1)/2}$ is
+\begin{equation}\label{eq:Vlead}
+                       C_n(\lambda)\ell_n(\lambda)\ell_{n+1}(\lambda),
+\end{equation}
+where
+\begin{align}
+ C_{2r}(\lambda)&=(r+2)\lambda+\frac{r(2r+5)}2,
+                      &&r\ge1,\label{eq:Ceven}\\
+ C_{2r+1}(\lambda)&=1+\frac{3r}{2}-r^2-r\lambda,
+                      &&r\ge0.\label{eq:Codd}
+\end{align}
+For real $\lambda>-\tfrac12$, the specialised degree equals
+$n(n+1)/2$ except at $(n,\lambda)=(3,3/2)$ and $(5,0)$, where it is
+respectively $5$ and $14$.
+\end{theorem}
+
+\begin{proof}
+Define $\wt D_n$ by the same shifted-last-column construction with the
+moments $\mu_j^{(\alpha)}$. Differentiate $D_n$ by columns. Each
+column derivative other than the last duplicates the next column, so
+\begin{equation}\label{eq:shiftderivative}
+                              D_n'(x)=\ii\wt D_n(x).
+\end{equation}
+This holds at every frequency, before any specialisation. At a positive
+zero $\zeta$ of $J_{\lambda-1}$, \eqref{eq:Pmoment} gives
+\[
+ \wt D_n(\zeta)=\mu_0(\zeta)^n
+          (\ii\zeta)^{-n(n-1)-1}\wt H_n(\zeta^2;\lambda).
+\]
+Consequently,
+\begin{equation}\label{eq:Vlogder}
+ \frac{V_n}{H_nH_{n+1}}
+ =\zeta\left(\frac{D_n'(\zeta)}{D_n(\zeta)}
+             -\frac{D_{n+1}'(\zeta)}{D_{n+1}(\zeta)}\right).
+\end{equation}
+No identity valid only on the discrete Bessel-zero set has been
+differentiated.
+
+Put $\alpha=\lambda-\tfrac12$. The even expansion and its derivative
+give
+\begin{equation}\label{eq:evenloglimit}
+ \lim_{x\to\infty}x\frac{(D_{2r}^{(\alpha)})'(x)}{D_{2r}^{(\alpha)}(x)}
+                        =-2r(\alpha+r).
+\end{equation}
+For the odd limit the first correction in
+Proposition~\ref{prop:oddexpansion} matters. The first two Bessel terms
+are
+\[
+ J_{\alpha-1/2}(x)=\sqrt{\frac2{\pi x}}
+ \left[\cos\theta-\frac{B_\alpha}{x}\sin\theta+O(x^{-2})\right],
+ \qquad B_\alpha=\frac{\alpha(\alpha-1)}2.
+\]
+Thus, at its large positive zeros, $\zeta\cot\theta\to B_\alpha$.
+Taking the logarithmic derivative of \eqref{eq:oddexpansion} yields
+\begin{align}
+ \lim_{\zeta\to\infty}\zeta
+ \frac{(D_{2r+1}^{(\alpha)})'(\zeta)}{D_{2r+1}^{(\alpha)}(\zeta)}
+ &=-E+B_\alpha-T_{r,\alpha}\notag\\
+ &=-[(3r+2)\alpha+3r^2+3r+1].\label{eq:oddloglimit}
+\end{align}
+Here $B_\alpha-T_{r,\alpha}=-(r+1)(\alpha+r)$. The relevant
+determinants are nonzero along all sufficiently large members of this
+sequence by the same endpoint estimates.
+
+Subtracting \eqref{eq:evenloglimit} and \eqref{eq:oddloglimit} in
+the appropriate order shows that the limit in \eqref{eq:Vlogder} is
+$C_n(\lambda)$. Since
+\[
+ \deg H_n+\deg H_{n+1}
+ =\left\lfloor\frac{n^2}4\right\rfloor
+  +\left\lfloor\frac{(n+1)^2}4\right\rfloor=\frac{n(n+1)}2,
+\]
+boundedness of the ratio along an unbounded positive sequence proves
+the degree upper bound, and its limit gives \eqref{eq:Vlead}.
+The coefficients are polynomials in $\lambda$, so these statements
+extend identically from $\lambda>-\tfrac12$. Since \eqref{eq:Vlead}
+is not identically zero, the formal degree is exact.
+
+For $\lambda>-\tfrac12$, every $\ell_n$ is nonzero.
+The factor $C_{2r}$ is positive. The factor $C_1$ is one, and for
+$r\ge1$ the unique zero of $C_{2r+1}$ is
+$\lambda=\tfrac32-r+1/r$. Only $r=1,2$ put this zero in the
+admissible parameter interval. The exact calculations below determine
+the remaining specialised degrees.
+\end{proof}
+
+At $\lambda=3/2$, the defining recurrence gives
+\begin{equation}\label{eq:exception3}
+ V_3=-4608(13u^5-402u^4+4428u^3-18441u^2+14175u-3645).
+\end{equation}
+At $\lambda=0$, it gives
+\begin{equation}\label{eq:exception5}
+ \begin{split}
+ V_5=181440u^9(&208u^5-9468u^4+154323u^3\\
+              &-973368u^2+1369008u-648000).
+ \end{split}
+\end{equation}
+Their leading coefficients are $-59904$ and $37739520$.
+These are finite exact polynomial identities, not numerical evaluations
+of Bessel functions. They can be checked directly from
+\eqref{eq:Prec}, \eqref{eq:Hdef} and \eqref{eq:Htilde}.
+
+The source writes its coefficients as functions of $\lambda$, so the
+natural reading of its second degree conjecture is the formal generic
+statement. Theorem~\ref{thm:Vdegree} confirms that statement and refines
+it at exceptional specialisations; the exceptions are not presented as
+a refutation of that generic interpretation.
+
+\section{The recurrence-coefficient conjectures}\label{sec:recurrence}
+
+Use the recurrence convention
+\[
+ \pi_{n+1}(t)=(t-\ii\alpha_n)\pi_n(t)-\beta_n\pi_{n-1}(t).
+\]
+At the Bessel-zero frequencies under consideration, its determinant
+formulas are
+\begin{equation}\label{eq:abdet}
+ \alpha_n=\frac1\zeta\left(\frac{\wt H_n}{H_n}
+                           -\frac{\wt H_{n+1}}{H_{n+1}}\right),
+ \qquad \beta_n=-\frac{H_{n-1}H_{n+1}}{uH_n^2},\qquad u=\zeta^2.
+\end{equation}
+They hold as rational-function identities, and give actual recurrence
+coefficients whenever the required determinants are nonzero. In the
+source regime of rational $\lambda>-\tfrac12$ and nonzero zeros of
+$J_{\lambda-1}$, nonvanishing follows from
+\cite[Theorem~2.2]{MCM2008}.
+
+\subsection{The general parameter}
+
+Put $d_n=\lfloor n^2/4\rfloor$, $E_n=H_n/\ell_n$, and $E_0=E_1=1$.
+The limits \eqref{eq:evenloglimit}--\eqref{eq:oddloglimit} show that
+$\deg\wt H_n\le d_n$ and that $\wt H_n/H_n\to b_n$, where
+\[
+ b_{2r}=-2r(\lambda-\tfrac12+r),\qquad
+ b_{2r+1}=-(3r+2)\lambda-3r^2-\tfrac32r.
+\]
+Set $S_n=n(2\lambda+n-1)$ and $e_n=S_n+b_n$. Thus
+\begin{equation}\label{eq:general-e}
+ e_{2r}=r(2\lambda+2r-1),\qquad
+ e_{2r+1}=\frac r2(2\lambda+2r+1).
+\end{equation}
+For $n\ge2$, these are positive when $\lambda>-\tfrac12$.
+
+\begin{lemma}\label{lem:constantshift}
+The polynomial identity $\wt H_n(0)+S_nH_n(0)=0$ holds for every
+$n\ge1$. Consequently
+\begin{equation}\label{eq:Fdef}
+ F_n(u)=\frac{\wt H_n(u)+S_nH_n(u)}{u\ell_ne_n},\qquad n\ge2,
+\end{equation}
+is monic of degree $d_n-1$.
+\end{lemma}
+
+\begin{proof}
+At $u=0$, \eqref{eq:Prec} gives $P_j(0)=(-1)^j(b)_j$, $b=2\lambda$.
+Factor $(b)_i$ from row $i$ and remove the row and column signs.
+The unshifted determinant is then the evaluation determinant of the
+monic polynomials $q_j(x)=(b+x)_j$, $0\le j<n$, at $x=0,\ldots,n-1$.
+Its determinant is the corresponding Vandermonde. The shifted last
+column uses $q_n$. Its coefficient of $x^{n-1}$ is
+$nb+n(n-1)/2$. Reducing it modulo $\prod_{i=0}^{n-1}(x-i)$ adds a
+further $n(n-1)/2$ to that coefficient. The ratio of the two evaluation
+determinants is therefore $n(b+n-1)=S_n$. The extra column shift changes
+the original sign by minus one. This proves the identity whenever
+the factored quantities are nonzero, hence identically in $\lambda$.
+
+The numerator in \eqref{eq:Fdef} is divisible by $u$. Its leading
+coefficient is $\ell_n(S_n+b_n)=\ell_ne_n\ne0$, proving the degree
+and monicity assertion.
+\end{proof}
+
+Define $X_{d_n}=E_n$ for $n\ge1$ and $X_{d_n-1}=F_n$ for $n\ge4$.
+These definitions are consistent: the sequence $d_n$, $n\ge1$, is
+strictly increasing, and $d_{n-1}<d_n-1<d_n$ for $n\ge4$. There are
+therefore no collisions between numerator and denominator labels.
+In particular $X_0=1$, $X_1=u-2\lambda$, and every assigned $X_j$
+is monic of degree $j$; unused labels may be filled arbitrarily.
+
+\begin{theorem}\label{thm:LZ25}
+All four formulas of \cite[Conjecture~2.5]{LyuZhou2026} hold in their
+stated ranges. Explicitly, with every $X$ evaluated at $u=\zeta^2$,
+\begin{align}
+ \alpha_{2k}={}&\frac{2(\lambda+2k)}\zeta
+ +k\zeta\left[(2\lambda+2k-1)\frac{X_{k^2-1}}{X_{k^2}}
+ -\frac{2\lambda+2k+1}{2}
+       \frac{X_{k(k+1)-1}}{X_{k(k+1)}}\right],&&k\ge2,
+ \label{eq:LZaeven}\\
+ \alpha_{2k+1}={}&\frac{2(\lambda+2k+1)}\zeta
+ +(2\lambda+2k+1)\zeta\left[
+ \frac k2\frac{X_{k(k+1)-1}}{X_{k(k+1)}}
+ -(k+1)\frac{X_{k(k+2)}}{X_{(k+1)^2}}\right],&&k\ge2,
+ \label{eq:LZaodd}\\
+ \beta_{2k}={}&-2k(2\lambda+2k-1)
+       \frac{X_{k(k-1)}X_{k(k+1)}}{uX_{k^2}^2},&&k\ge1,
+ \label{eq:betaeven}\\
+ \beta_{2k+1}={}&\frac{X_{k^2}X_{(k+1)^2}}{uX_{k(k+1)}^2},&&k\ge0.
+ \label{eq:betaodd}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:Fdef}, $\wt H_n/H_n=-S_n+ue_nF_n/E_n$.
+Substitution in \eqref{eq:abdet}, using $S_{n+1}-S_n=2(\lambda+n)$,
+gives
+\[
+ \alpha_n=\frac{2(\lambda+n)}\zeta+
+       \zeta\left(e_n\frac{F_n}{E_n}-e_{n+1}\frac{F_{n+1}}{E_{n+1}}\right).
+\]
+The values \eqref{eq:general-e} give the first two formulas.
+The ratios of the leading coefficients
+\eqref{eq:Hevenlead}--\eqref{eq:Hoddlead} give the last two.
+\end{proof}
+
+The lower-index restriction on the $\alpha$ formulas is necessary for
+this common-index notation. Directly,
+$F_2=1$, $F_3=u-4\lambda^2-4\lambda$, and $E_2=u-2\lambda$.
+The last two degree-one polynomials are generally different.
+The source uses the displayed common-index formulas only for $k\ge2$;
+its separate formulas for $\alpha_2,\alpha_3$ retain the appropriate
+small-index numerator. For fixed admissible $\lambda$ the constructed
+$X_j$ are ordinary polynomials in $u$; formally their coefficients lie
+in $\Q(\lambda)$.
+
+\subsection{The exceptional parameter \texorpdfstring{$\lambda=0$}{lambda=0}}
+
+At $\lambda=0$, powers of $u$ cancel from the Hankel determinants,
+leading to the different index pattern of
+\cite[Conjecture~2.7]{LyuZhou2026}. We now establish that pattern
+and all its recurrence formulas.
+
+\begin{lemma}\label{lem:valuation}
+For $n\ge1$, the exact valuation of $H_n(u;0)$ at $u=0$ is $n-1$.
+Writing $m=n-1$, its first coefficient is
+\begin{equation}\label{eq:lowcoefficient}
+ [u^{n-1}]H_n(u;0)=
+ \left(-\frac12\right)^m
+ \left(1+\frac{m(m+1)}2\right)\prod_{j=0}^{m-1}j!(j+1)!.
+\end{equation}
+If $H_n=u^{n-1}R_n$ and $\wt H_n=u^{n-1}\wt R_n$, then
+\begin{equation}\label{eq:zeroRshift}
+ \frac{\wt R_n(0)}{R_n(0)}=-A_n,
+ \qquad A_n=\frac{[n(n-1)]^2}{n(n-1)+2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The case $n=1$ is immediate, so assume $n\ge2$. Every entry in rows
+$1,\ldots,n-1$ of $H_n$ and of $\wt H_n$ has positive moment index, hence
+is divisible by $u$, because every $P_j$ with $j\ge1$ is (at $\lambda=0$,
+$P_1=0$ and \eqref{eq:Prec} gives $u\mid P_{k+2}$ inductively); factoring $u$ from those rows proves
+$u^{n-1}\mid H_n$ and $u^{n-1}\mid\wt H_n$, so $R_n$ and $\wt R_n$ are
+polynomials.
+Every $P_j$, $j\ge1$, is divisible by $u$. Its first coefficient is
+$q_1=0$, $q_2=-1$, and
+$q_j=(-1)^{j-1}(j-1)!/2$ for $j\ge3$, by \eqref{eq:Prec}.
+Factor $u$ from rows $1,\ldots,n-1$ in $H_n$ and take the constant
+term of the remaining determinant. The first row then reduces to
+its top entry, giving
+\[
+ [u^{n-1}]H_n=
+ \left(-\frac12\right)^m
+ \det[\Gamma(i+j+2)+\delta_{i0}\delta_{j0}]_{i,j=0}^{m-1}.
+\]
+The last matrix is the positive Gram matrix for
+\begin{equation}\label{eq:Laguerreatom}
+                         \dd\rho(t)=te^{-t}\dd t+\delta_0,
+                         \qquad t\in[0,\infty),
+\end{equation}
+so it is nonsingular.
+
+For completeness its determinant and shifted ratio can be computed
+together. Let $p_j(t)=(-1)^jj!L_j^{(1)}(t)$ be monic Laguerre
+polynomials for $te^{-t}\dd t$. Their squared norms are
+$h_j=j!(j+1)!$, their values at zero are $(-1)^j(j+1)!$, and the
+coefficient of $t^{m-1}$ in $p_m$ is $-m(m+1)$. For the kernel
+$K_{m-1}(t,s)=\sum_{j=0}^{m-1}p_j(t)p_j(s)/h_j$,
+\[
+                         K_{m-1}(0,0)=\frac{m(m+1)}2.
+\]
+The matrix determinant lemma gives the factor
+$1+K_{m-1}(0,0)$ multiplying the Laguerre determinant, proving
+\eqref{eq:lowcoefficient}. The monic polynomial orthogonal for
+\eqref{eq:Laguerreatom} is
+\[
+ Q_m(t)=p_m(t)-\frac{p_m(0)}{1+K_{m-1}(0,0)}K_{m-1}(t,0).
+\]
+Its orthogonality follows directly from the reproducing property of
+the kernel. Put $B=m(m+1)$. Its subleading coefficient is
+$-B+B/(1+B/2)=-B^2/(B+2)$.
+The shifted-column determinant formula for that coefficient,
+together with the extra minus sign from the shifted column in the
+original $q_j$, identifies it with $\wt R_n(0)/R_n(0)$.
+This proves \eqref{eq:zeroRshift}.
+\end{proof}
+
+Put
+\begin{equation}\label{eq:sndef}
+ s_n=\deg R_n=d_n-n+1=
+                  \left\lfloor\frac{(n-2)^2}{4}\right\rfloor.
+\end{equation}
+At $\lambda=0$, the limits of the shifted ratios are
+\[
+ b_n=\begin{cases}
+       -n(n-1)/2,&n\text{ even},\\
+       -3n(n-1)/4,&n\text{ odd}.
+      \end{cases}
+\]
+Set $\eta_n=A_n+b_n$. Explicitly,
+\begin{equation}\label{eq:eta}
+ \eta_{2k}=\frac{k(k-1)(2k-1)(2k+1)}{k(2k-1)+1},\qquad
+ \eta_{2k+1}=\frac{k(k-1)(2k+1)(2k+3)}{2[k(2k+1)+1]}.
+\end{equation}
+These are nonzero for $n\ge4$. By \eqref{eq:zeroRshift},
+\[
+ T_n(u)=\frac{\wt R_n(u)+A_nR_n(u)}u
+\]
+is a polynomial of degree $s_n-1$ with leading coefficient
+$\ell_n\eta_n$. Define
+\[
+ Y_{s_n}=R_n/\ell_n\quad(n\ge2),\qquad
+ Y_{s_n-1}=T_n/(\ell_n\eta_n)\quad(n\ge6).
+\]
+The two definitions of $Y_0$ from $n=2,3$ agree and equal one;
+$Y_1=u-21/4$. For $n\ge6$,
+$s_{n-1}<s_n-1<s_n$, so all further numerator labels are distinct
+and do not collide with denominator labels. Each assigned $Y_j$ is
+monic of degree $j$.
+
+\begin{theorem}\label{thm:LZ27}
+All formulas of \cite[Conjecture~2.7]{LyuZhou2026} hold in their
+stated ranges. A unified form for its diagonal formulas is
+\begin{equation}\label{eq:LZzeroalpha}
+ \begin{split}
+ \alpha_n={}&
+ \frac{2n^3(n^2+3)}{(n^2-n+2)(n^2+n+2)\zeta}\\
+ &+\zeta\left(
+ \eta_n\frac{Y_{s_n-1}(u)}{Y_{s_n}(u)}
+ -\eta_{n+1}\frac{Y_{s_{n+1}-1}(u)}{Y_{s_{n+1}}(u)}\right),
+ \qquad n\ge6.
+ \end{split}
+\end{equation}
+The two off-diagonal formulas are
+\begin{align}
+ \beta_{2k}&=-\frac{2k(2k-1)}u
+ \frac{Y_{(k-1)(k-2)}Y_{k(k-1)}}{Y_{(k-1)^2}^2},&&k\ge1,
+ \label{eq:LZzerobeven}\\
+ \beta_{2k+1}&=\frac1u
+ \frac{Y_{(k-1)^2}Y_{k^2}}{Y_{k(k-1)}^2},&&k\ge1.
+ \label{eq:LZzerobodd}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+The construction gives
+$\wt H_n/H_n=-A_n+u\eta_nY_{s_n-1}/Y_{s_n}$ for $n\ge6$.
+Insert this in \eqref{eq:abdet} and use
+\[
+ A_{n+1}-A_n=\frac{2n^3(n^2+3)}{(n^2-n+2)(n^2+n+2)}
+\]
+to obtain \eqref{eq:LZzeroalpha}. Inserting
+$H_n=u^{n-1}\ell_nY_{s_n}$ in the second formula of
+\eqref{eq:abdet}, and using
+$\ell_{2k-1}\ell_{2k+1}/\ell_{2k}^2=2k(2k-1)$ and
+$\ell_{2k}\ell_{2k+2}/\ell_{2k+1}^2=-1$, gives the two $\beta$
+formulas. Substituting $n=2k$, $n=4j-1$, and $n=4j+1$ into
+\eqref{eq:LZzeroalpha} gives the three diagonal displays in the
+source, respectively for $k\ge3$, $j\ge2$, and $j\ge2$.
+\end{proof}
+
+The source's exclusions of the diagonal indices four and five matter.
+At $n=5$, the monic secondary numerator is $u-177/8$, whereas the
+already fixed denominator polynomial $Y_1$ is $u-21/4$.
+The stated ranges avoid identifying those different polynomials.
+At $n=4$ the secondary numerator is simply $Y_0=1$.
+
+\subsection{Comparison with the polynomials listed by Lyu and Zhou}
+Lyu and Zhou list the polynomials $X_j$ and $Y_j$ only at low indices
+\cite[Appendix~C]{LyuZhou2026}. Table~\ref{tab:LZ} records an exact
+symbolic comparison of every listed polynomial with the monic
+constructions used above ($X$ for generic $\lambda$, $Y$ at $\lambda=0$).
+All eighteen agree exactly, as do the base cases $X_0=1$,
+$X_1=u-2\lambda$ and $Y_1=u-21/4$.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llll}
+\hline
+Family & Index $j$ & Manuscript polynomial & Exact agreement\\
+\hline
+$X_{2}$ & 2 & $H_{3}/\ell_{3}$ (monic) & yes\\
+$X_{3}$ & 3 & $F_{4}$ (monic) & yes\\
+$X_{4}$ & 4 & $H_{4}/\ell_{4}$ (monic) & yes\\
+$X_{5}$ & 5 & $F_{5}$ (monic) & yes\\
+$X_{6}$ & 6 & $H_{5}/\ell_{5}$ (monic) & yes\\
+$X_{8}$ & 8 & $F_{6}$ (monic) & yes\\
+$X_{9}$ & 9 & $H_{6}/\ell_{6}$ (monic) & yes\\
+$Y_{2}$ & 2 & $R_{5}/\ell_{5}$ (monic) & yes\\
+$Y_{3}$ & 3 & $T_{6}$ (monic) & yes\\
+$Y_{4}$ & 4 & $R_{6}/\ell_{6}$ (monic) & yes\\
+$Y_{5}$ & 5 & $T_{7}$ (monic) & yes\\
+$Y_{6}$ & 6 & $R_{7}/\ell_{7}$ (monic) & yes\\
+$Y_{8}$ & 8 & $T_{8}$ (monic) & yes\\
+$Y_{9}$ & 9 & $R_{8}/\ell_{8}$ (monic) & yes\\
+$Y_{11}$ & 11 & $T_{9}$ (monic) & yes\\
+$Y_{12}$ & 12 & $R_{9}/\ell_{9}$ (monic) & yes\\
+$Y_{15}$ & 15 & $T_{10}$ (monic) & yes\\
+$Y_{16}$ & 16 & $R_{10}/\ell_{10}$ (monic) & yes\\
+\hline
+\end{tabular}
+\caption{Exact agreement of the manuscript's polynomials with those listed in \cite[Appendix~C]{LyuZhou2026}.}\label{tab:LZ}
+\end{table}
+
+\section{Consequences and limits}\label{sec:consequences}
+
+\subsection{Rationality in special-frequency existence}
+
+The rationality assumption in the all-degree existence theorem of
+\cite[Theorem~2.2]{MCM2008} cannot be removed throughout the real
+parameter interval.
+
+\begin{proposition}\label{prop:irrational}
+For every integer $m\ge2$, there is an irrational $\lambda_m>1/2$ such
+that, with $\zeta_m=j_{\lambda_m-1,m}$,
+\[
+                   D_3^{(\lambda_m-1/2)}(\zeta_m)=0.
+\]
+There are infinitely many distinct such parameters. At each of these
+points the monic orthogonal polynomial of degree three does not exist,
+although every even degree exists uniquely.
+\end{proposition}
+
+\begin{proof}
+The recurrence \eqref{eq:Prec} gives
+\[
+ H_3(u;\lambda)=2(2\lambda+1)
+        [u^2-\lambda(2\lambda+5)u+4\lambda^2].
+\]
+For $\lambda\ge1/2$, set
+\[
+ F_m(\lambda)=j_{\lambda-1,m}^4
+ -\lambda(2\lambda+5)j_{\lambda-1,m}^2+4\lambda^2.
+\]
+Positive Bessel zeros vary continuously with the order in this range.
+At $\lambda=1/2$, put $u_m=(m-1/2)^2\pi^2$. Then
+$F_m(1/2)=u_m^2-3u_m+1>0$ for $m\ge2$. The fixed-index large-order
+expansion $j_{\nu,m}=\nu+O(\nu^{1/3})$
+\cite[\S10.21, Eq.~10.21.32]{DLMF} gives
+$F_m(\lambda)/\lambda^4\to-1$. The intermediate value theorem
+therefore gives a root $\lambda_m>1/2$.
+
+At a positive zero of $J_{\lambda-1}$, the function $J_\lambda$ is
+nonzero: a common zero would also make the derivative of
+$J_{\lambda-1}$ vanish at an ordinary point of its differential
+equation. Thus \eqref{eq:DH} converts $F_m(\lambda_m)=0$ into the
+asserted determinant zero. If $\lambda_m$ were rational,
+\cite[Theorem~2.2]{MCM2008} would give nonvanishing of every
+determinant there. Hence $\lambda_m$ is irrational. A fixed parameter
+permits at most two positive $u$ solving the displayed quadratic, so
+finitely many parameters cannot account for all indices $m\ge2$.
+
+Finally, let $p_2$ be the monic quadratic, which exists because
+$D_2>0$. At $D_3=0$, its norm is zero, so it is orthogonal through
+degree two. If a monic orthogonal cubic existed, symmetry of the
+bilinear form would also make $p_2$ orthogonal to degree three. The
+size-four moment matrix would then be singular, contrary to $D_4>0$.
+The even-degree conclusion follows from Theorem~\ref{thm:main}.
+\end{proof}
+
+This excludes a natural unrestricted-real-parameter extension of the
+2008 existence theorem; no published conjecture of that extension is
+being attributed to its authors.
+
+\subsection{Symmetry is insufficient}
+
+Consider the symmetric positive probability measure
+\[
+ \nu=\frac16(\delta_{-1}+\delta_{-1/2}+2\delta_0+
+                         \delta_{1/2}+\delta_1).
+\]
+Form its Fourier Hankel determinants using
+$\mu_j=\int t^je^{\ii xt}\dd\nu(t)$. At $x=2\pi$, odd moments
+vanish and
+\[
+       \mu_0=\frac13,\qquad \mu_2=\frac14,
+       \qquad\mu_4=\frac5{16},\qquad\mu_6=\frac{21}{64}.
+\]
+Thus $D_2=1/12>0$, whereas parity-block decomposition gives
+\begin{equation}\label{eq:atomic}
+ D_4=\left(\frac13\frac5{16}-\frac1{16}\right)
+       \left(\frac14\frac{21}{64}-\frac{25}{256}\right)
+     =-\frac1{1536}<0.
+\end{equation}
+The Gegenbauer structure in the positivity theorem is substantive.
+Positive-definite functions may take negative values, so this example
+does not conflict with the Fourier-Wronskian positive-definiteness
+results of \cite{DimitrovXu2019}.
+
+\subsection{Spherical-Bessel determinants and critical length}
+
+Define
+\begin{equation}\label{eq:fW}
+ f_n(x)=\sqrt{\frac\pi2}x^{n+1/2}J_{n+1/2}(x),\qquad
+ W_k[f](x)=(-1)^{k(k-1)/2}
+                      \det[f^{(i+j)}(x)]_{i,j=0}^{k-1}.
+\end{equation}
+Appendix~\ref{app:duality} proves that, for $1\le k\le n+1$,
+\begin{equation}\label{eq:dualitymain}
+ W_k[f_n](x)=
+ \frac{2^{k(k-n-2)}(n!)^k}
+      {\displaystyle\prod_{q=n+1-k}^{n}(q!)^2}
+ x^{k(2n+2-k)}D_k^{(n+1-k)}(x).
+\end{equation}
+All constants are positive. Theorem~\ref{thm:main} therefore gives
+\begin{corollary}\label{cor:evenW}
+For every $n\ge0$, every even $k$ with $2\le k\le n+1$, and every
+$x>0$, one has $W_k[f_n](x)>0$.
+\end{corollary}
+
+Let
+\[
+ U_n=\spanop\{x^j\cos x,x^j\sin x:0\le j\le n\}.
+\]
+Its critical length is the supremum of interval lengths on which every
+nonzero member has fewer than $2n+2$ zeros, counted with multiplicity.
+Carnicer, Mainar and Pe\~na \cite{CMP2023} conjecture that this length
+is the first positive zero $j_{n+1/2,1}$ of $J_{n+1/2}$.
+
+\begin{corollary}\label{cor:CMP3}
+The critical length of $U_3$ is $j_{7/2,1}$.
+\end{corollary}
+
+\begin{proof}
+The space $U_n$ is invariant under translation and reflection, and
+$u_j=f_n^{(2n+1-j)}$, $0\le j\le2n+1$, is a canonical basis at zero.
+Here canonical means $u_j^{(i)}(0)=0$ for $i<j$ and
+$u_j^{(j)}(0)\ne0$, as in \cite[Eq.~(2)]{CMP2023}.
+Indeed $f_n$ has a zero of order $2n+1$ there and belongs to
+$\ker(D^2+1)^{n+1}$. The critical length is finite: $f_n$ has
+$2n+1$ zeros at the origin, counted with multiplicity, and another at
+its first positive zero. Proposition~3 of \cite{CMP2023} states that the
+critical length is the least positive zero among the suffix
+Wronskians with $j>(2n+1)/2$. Such a suffix has size
+$k=2n+2-j$, so precisely $1\le k\le n+1$ occurs. Reversing its
+columns identifies its Wronskian with $W_k[f_n]$.
+
+For $n=3$, only $k=1,2,3,4$ is required. The function $W_1=f_3$ is
+positive on $(0,j_{7/2,1})$ and vanishes at its right endpoint.
+Corollary~\ref{cor:evenW} gives positivity of $W_2,W_4$ for every
+$x>0$. Kounchev and Render \cite[Corollary~21]{KounchevRender2025}
+(an unrefereed preprint, on which this corollary depends) prove that $W_3[f_3]$ is positive on $(0,j_{7/2,1})$. Thus none of
+the required suffix Wronskians vanishes earlier, and one vanishes at
+the stated endpoint.
+\end{proof}
+
+For general $n$, \eqref{eq:dualitymain} leaves a first-zero comparison
+for odd determinants of size at least five. Infinite oscillation and
+simple zeros do not supply that comparison. No resolution of the
+general critical-length conjecture is claimed.
+
+\section{Checks and the scope of the literature comparison}\label{sec:scope}
+
+At $\alpha=0$ and size two,
+\[
+ D_2^{(0)}(x)=\frac{4(x^2-\sin^2x)}{x^4},\qquad D_2^{(0)}(0)=\frac43.
+\]
+This checks the sign and $C_{1,0}=4$ in \eqref{eq:eventail}. The general
+coefficient formula gives $C_{2,0}=256$, consistent with the exponent-zero endpoint
+calculation in \cite{Celsus2022}. At odd size one,
+$D_1^{(0)}(x)=2\sin x/x$ and $T_{0,0}=0$.
+Exact symbolic calculations from \eqref{eq:Prec} for $n=1,\ldots,5$
+give degrees $0,1,2,4,6$ and leading coefficients
+\[
+ 1,\quad -1,\quad 2(2\lambda+1),\quad4(2\lambda+1)^2,
+ \quad32(2\lambda+1)^3(2\lambda+3).
+\]
+They verify normalisation and signs; the all-rank arguments above are
+independent of these finite checks.
+
+The companion script \texttt{verify.py} records its results in
+\texttt{verification\_results.json}. At 90 decimal digits it checked
+120 even determinants: sizes $2,4,6,8$, frequencies
+$0,0.1,\pi,10,50$, and exponents
+$-0.99,-0.5,0,0.5,1.4142135623730950488,3$.
+All computed determinants were positive. The moments were cross-checked
+against an independent hypergeometric formula. The same script checks
+\eqref{eq:selbergzero}, the exact $D_2^{(0)}$ identity, the tail constants,
+and the Toda identity. Its exact symbolic checks cover $H_n$ through
+$n=5$, generic shifted numerators through $n=4$, the general-parameter
+residual polynomials through $n=5$, and the zero-parameter reduced
+determinants and shifted ratios through $n=9$. It also verifies both
+exceptional polynomials \eqref{eq:exception3}--\eqref{eq:exception5} and the atomic
+example \eqref{eq:atomic}. These computations are checks of formulas
+and normalisations, not a numerical proof of the theorems.
+
+The comparison made for this draft includes the full 2008 paper, the
+2022 exponent-zero existence proof, Dimitrov--Xu's Fourier-Wronskian
+results, the 2025 rank-three critical-length result, and Lyu--Zhou's
+2026 recurrence paper. The finite verification record
+\cite{Ideosphere2026} reports degree checks through $n=16$ and more
+limited recurrence-coefficient checks. Such a finite verification is
+different in scope from the all-rank arguments here.
+
+A close classical comparison is also important. The Karlin--Szeg\H{o}
+even-determinant inequalities, as set out in
+\cite[Section~2.2]{BariczPogany2014}, differentiate
+$u^{-\nu/2}J_\nu(2\sqrt u)$ with respect to $u$ and hence lead to
+order-shifted Bessel entries. Our determinant differentiates
+$x^{-\nu}J_\nu(x)$ with respect to $x$. A nonlinear substitution does
+not generally preserve derivative Hankel determinants: writing
+$\mathcal H_2[f]=ff''-(f')^2$, the chain rule gives
+\[
+ \mathcal H_2[f\circ\phi]
+ =\phi'^2(\mathcal H_2[f]\circ\phi)
+   +\phi''((ff')\circ\phi).
+\]
+Thus that classical result is not an immediate reparametrisation of
+Theorem~\ref{thm:main}. This comparison rules out the direct
+identification; it does not claim to exclude every deeper connection.
+
+\paragraph{The earlier claim.}
+Ashfaque \cite{Ashfaque2026} (ResearchGate, 24 July 2026) states in its
+abstract and Proposition~3.1 that the symbolic recurrence formulas
+conjectured by Lyu and Zhou follow from a discrete Painlev\'e~IV and
+tau-function identification. Our description is based on a full reading
+of that six-page document on 2 November 2026; the host later blocked
+automated access, so readers should consult the original. In its
+notation the weight is $(1-x^2)^{\lambda-1/2}e^{\ii\zeta x}$ with
+$J_{\lambda-1}(\zeta)=0$, the recurrence is
+$xP_n=P_{n+1}+\ii\alpha_nP_n+\beta_nP_{n-1}$ with real $\alpha_n$, and
+it sets $u_n=\zeta\alpha_n-(2n+2\lambda-1)$. Proposition~3.1 defines
+$D_n^{(1)}=\det[\mu_{i+j+1}]_{i,j=0}^{n-1}$, shifting every moment
+index, and asserts
+\begin{equation}\label{eq:ashfaqueA}
+ u_n=\zeta\frac{D_n^{(1)}}{D_n}-(2n+2\lambda-1).
+\end{equation}
+This cannot hold as printed. For real $\zeta$,
+$\overline{\mu_j}=(-1)^j\mu_j$, so the argument used in
+Section~\ref{sec:continuation} shows that $D_n^{(1)}$ is purely imaginary
+when $n$ is odd, while $D_n$ is real. At $n=1$,
+$\mu_1/\mu_0=\ii J_{\lambda+1}(\zeta)/J_\lambda(\zeta)=2\ii\lambda/\zeta$ at
+every nonzero real zero of $J_{\lambda-1}$ (where $J_\lambda(\zeta)\ne0$,
+since adjacent Bessel functions have no common nonzero zero), by the three-term Bessel recurrence. The
+right side of \eqref{eq:ashfaqueA} is then $2\ii\lambda-(2\lambda+1)$,
+which is not real when $\lambda\ne0$, whereas the left side is real. At
+$\lambda=0$ the two sides are $-1$ and $0$ respectively, using
+Lyu and Zhou's initial value $\alpha_1=1/\zeta$. The failure is not
+an index slip: the right side alternates between imaginary and real as
+the parity of $n$ changes, so no fixed index shift or constant phase
+repairs it for all $n$. Moreover the subleading coefficient of a monic orthogonal
+polynomial comes from a single last-column shift, and $\alpha_n$ is a
+difference of two such ratios. A corrected argument along those lines
+may exist; we make no judgement about one. The arguments in this
+manuscript do not use that proposition or the claimed resolution, but
+the earlier public claim is part of the priority record and we do not
+claim to be first to assert these formulas.
+
+This is a bounded comparison, not an exhaustive priority determination.
+In particular, no claim of historical firstness is inferred solely
+from the absence of a located valid proof. The central mathematical
+claims of the draft are the extension in Theorem~\ref{thm:main}, the
+explicit all-rank algebraic results in
+Theorems~\ref{thm:Hdegree} and \ref{thm:Vdegree}, and the stated
+critical-length corollary. They are provided with proofs so that their
+validity and their relation to earlier work can be assessed separately.
+
+\appendix
+\section{An exact Bessel--Jacobi determinant identity}\label{app:duality}
+
+This appendix proves \eqref{eq:dualitymain}, including its constant.
+The two standard inputs are the normalised unitary HCIZ integral
+\cite[Eq.~(2)]{McSwiggen2019} and the Jacobi law for random projection
+compressions \cite[Theorem~2.2]{Collins2005}. The determinant reduction
+between them is given explicitly.
+
+\subsection{A confluent orbital-integral identity}
+
+Let $1\le k\le N$ and initially let $a_1,\ldots,a_N$ be distinct
+complex numbers. Put
+\[
+ p(z)=\prod_{j=1}^N(z-a_j),\qquad
+ g(x)=\sum_{j=1}^N\frac{e^{a_jx}}{p'(a_j)},\qquad
+ A=\diag(a_1,\ldots,a_N),\quad B=\diag(0_{N-k},1_k).
+\]
+Normalise Haar measure on $U(N)$ to mass one and set
+\[
+ I_{N,k}(A;x)=\int_{U(N)}e^{x\tr(AUBU^*)}\dd U,\qquad
+ Q_{N,k}=\frac{\prod_{j=N-k}^{N-1}j!}{\prod_{j=0}^{k-1}j!}.
+\]
+We claim that
+\begin{equation}\label{eq:HCIZW}
+            I_{N,k}(A;x)=Q_{N,k}x^{-k(N-k)}W_k[g](x).
+\end{equation}
+Start with the normalised HCIZ formula
+\begin{equation}\label{eq:HCIZ}
+ \int_{U(N)}e^{x\tr(AUCU^*)}\dd U
+ =\left(\prod_{j=1}^{N-1}j!\right)
+ \frac{\det[e^{xa_ic_j}]_{i,j=1}^N}
+ {x^{N(N-1)/2}\Delta(a)\Delta(c)}.
+\end{equation}
+Analyticity extends the usual real diagonal formula to complex
+diagonal entries. Coalesce $N-k$ eigenvalues of $C$ at zero and $k$
+at one. The confluent columns are
+\[
+ \frac{(xa_i)^j}{j!}\quad(0\le j<N-k),\qquad
+ \frac{(xa_i)^\ell e^{xa_i}}{\ell!}\quad(0\le\ell<k).
+\]
+The cross-cluster Vandermonde factors are one. Factoring powers and
+factorials gives
+\begin{equation}\label{eq:Mdet}
+ I_{N,k}(A;x)=Q_{N,k}x^{-k(N-k)}\frac{\det M(x)}{\Delta(a)},
+ \quad
+ M=[a_i^j\ (0\le j<N-k)\mid a_i^\ell e^{xa_i}\ (0\le\ell<k)].
+\end{equation}
+
+Let $V=[a_i^j]_{1\le i\le N,\;0\le j<N}$. The first $N-k$ columns
+of $V^{-1}M$ are coordinate vectors, so its determinant is that of its
+bottom-right $k$-by-$k$ block. In a column labelled by $\ell$, its
+entries are coefficients of the polynomial interpolating
+$a_i^\ell e^{xa_i}$ at the nodes. The coefficient of $z^{N-1-s}$ in
+the $i$th Lagrange polynomial is
+\[
+ \frac{(-1)^se_s(a_1,\ldots,\widehat{a_i},\ldots,a_N)}{p'(a_i)}
+ =\frac{a_i^s+\sum_{q=0}^{s-1}c_{s,q}a_i^q}{p'(a_i)},
+\]
+where the $c_{s,q}$ depend only on the full node set. The corresponding
+entry is therefore
+$g^{(s+\ell)}+\sum_{q<s}c_{s,q}g^{(q+\ell)}$.
+The bottom rows have $s=k-1,\ldots,0$. Reverse them, producing
+$(-1)^{k(k-1)/2}$, and eliminate the lower triangular terms by unit
+triangular row operations. The resulting determinant is exactly
+$W_k[g]$. This proves \eqref{eq:HCIZW}.
+
+The formulas extend continuously to coalescing nodes. For example,
+$g$ is the exponential divided difference, equivalently
+\[
+                         g(x)=\frac1{2\pi\ii}\oint\frac{e^{xz}}{p(z)}\dd z,
+\]
+where the contour encloses all roots of $p$.
+
+\subsection{Coalescing at the spherical-Bessel spectrum}
+
+Take $N=2n+2$, $m=n+1$, and $A=\diag(-\ii I_m,\ii I_m)$.
+Then $p(z)=(z^2+1)^{n+1}$ and $g$ is the fundamental solution of
+\[
+ (D^2+1)^{n+1}g=0,\qquad
+ g^{(j)}(0)=0\ (0\le j<2n+1),\qquad g^{(2n+1)}(0)=1.
+\]
+The spherical-Bessel function $f_n$ belongs to this solution space
+and satisfies
+\[
+ f_n(x)=\frac{x^{2n+1}}{(2n+1)!!}+O(x^{2n+3}),\qquad
+ \frac{(2n+1)!}{(2n+1)!!}=2^nn!.
+\]
+Hence $g=f_n/(2^nn!)$, and \eqref{eq:HCIZW} becomes
+\begin{equation}\label{eq:orbitalW}
+ I_{N,k}(A;x)=\frac{Q_{N,k}}{(2^nn!)^k}
+                     x^{-k(N-k)}W_k[f_n](x).
+\end{equation}
+
+Write $A=\ii(2P-I_N)$, where $P$ is a rank-$m$ orthogonal projection.
+If $V$ consists of the $k$ columns of $U$ selected by $B$, then
+$\tr(AUBU^*)=\ii(2\tr(V^*PV)-k)$. For $k\le m$, the eigenvalues
+$s_1,\ldots,s_k$ of $V^*PV$ have Jacobi density
+\begin{equation}\label{eq:Jacobilaw}
+ \text{constant}\cdot\Delta(s)^2
+        \prod_{j=1}^ks_j^{m-k}(1-s_j)^{m-k},\qquad 0<s_j<1.
+\end{equation}
+After $t_j=2s_j-1$, this is proportional to
+$\Delta(t)^2\prod(1-t_j^2)^{m-k}$. Andr\'eief's identity therefore
+identifies the same orbital integral as
+\begin{equation}\label{eq:orbitalD}
+                  I_{N,k}(A;x)=\frac{D_k^{(n+1-k)}(x)}{D_k^{(n+1-k)}(0)}.
+\end{equation}
+
+Finally, \eqref{eq:selbergzero} gives
+\[
+ Q_{2n+2,k}D_k^{(n+1-k)}(0)
+       =2^{k(2n+2-k)}\prod_{q=n+1-k}^{n}(q!)^2.
+\]
+Combining \eqref{eq:orbitalW} and \eqref{eq:orbitalD} proves
+\eqref{eq:dualitymain}. Both sides are entire, so the identity extends
+to complex frequency, including zero by continuation.
+
+For $k=1$ the identity reduces to
+$f_n=x^{2n+1}D_1^{(n)}/(2^{n+1}n!)$. For $n=1,k=2$, it gives
+$W_2[f_1]=x^2-\sin^2x$, agreeing with
+$D_2^{(0)}=4(x^2-\sin^2x)/x^4$ and the constant $1/4$.
+
+\begin{thebibliography}{99}
+
+\bibitem{Celsus2022}
+A.~F. Celsus, A. Dea\~no, D. Huybrechs and A. Iserles,
+\emph{The kissing polynomials and their Hankel determinants},
+Transactions of Mathematics and Its Applications \textbf{6} (2022), tnab005.
+\href{https://doi.org/10.1093/imatrm/tnab005}{doi:10.1093/imatrm/tnab005}.
+
+\bibitem{MCM2008}
+G.~V. Milovanovi\'c, A.~S. Cvetkovi\'c and Z.~M. Marjanovi\'c,
+\emph{Orthogonal polynomials for the oscillatory-Gegenbauer weight},
+Publications de l'Institut Math\'ematique, Nouvelle s\'erie
+\textbf{84}(98) (2008), 49--60.
+\href{https://doi.org/10.2298/PIM0898049M}{doi:10.2298/PIM0898049M}.
+
+\bibitem{DimitrovXu2019}
+D.~K. Dimitrov and Y. Xu,
+\emph{Wronskians of Fourier and Laplace transforms},
+Transactions of the American Mathematical Society \textbf{372} (2019),
+4107--4125.
+\href{https://doi.org/10.1090/tran/7809}{doi:10.1090/tran/7809}.
+
+\bibitem{LyuZhou2026}
+S. Lyu and X. Zhou,
+\emph{Recurrence coefficients of the orthogonal polynomials for
+oscillatory Jacobi-type weight functions}, preprint (2026).
+\href{https://arxiv.org/abs/2607.19797v1}{arXiv:2607.19797v1}.
+
+\bibitem{ADHW2014}
+Andreas Asheim, Alfredo Deaño, Daan Huybrechs and Haiyong Wang,
+\emph{A Gaussian quadrature rule for oscillatory integrals on a bounded interval},
+Discrete and Continuous Dynamical Systems \textbf{34}(3) (2014), 883--901.
+\href{https://doi.org/10.3934/dcds.2014.34.883}{doi:10.3934/dcds.2014.34.883}.
+
+\bibitem{DeanoHuybrechs2009}
+Alfredo Deaño and Daan Huybrechs,
+\emph{Complex Gaussian quadrature of oscillatory integrals},
+Numerische Mathematik \textbf{112}(2) (2009), 197--219.
+\href{https://doi.org/10.1007/s00211-008-0209-z}{doi:10.1007/s00211-008-0209-z}.
+
+\bibitem{DHI2017}
+Alfredo Deaño, Daan Huybrechs and Arieh Iserles,
+\emph{Computing Highly Oscillatory Integrals},
+Society for Industrial and Applied Mathematics, 2017.
+\href{https://doi.org/10.1137/1.9781611975123}{doi:10.1137/1.9781611975123}.
+
+\bibitem{Barhoumi2021}
+A.~B. Barhoumi,
+\emph{Strong asymptotics of Jacobi-type kissing polynomials},
+Integral Transforms and Special Functions \textbf{32}(5--8) (2021),
+377--394.
+\href{https://doi.org/10.1080/10652469.2021.1923707}
+{doi:10.1080/10652469.2021.1923707}.
+
+\bibitem{BariczPogany2014}
+\'A. Baricz and T.~K. Pog\'any,
+\emph{Tur\'an determinants of Bessel functions},
+Forum Mathematicum \textbf{26}(1) (2014), 295--322.
+\href{https://doi.org/10.1515/form.2011.160}{doi:10.1515/form.2011.160};
+consulted author preprint
+\href{https://arxiv.org/abs/1101.4624v2}{arXiv:1101.4624v2}.
+
+\bibitem{CMP2023}
+J.~M. Carnicer, E. Mainar and J.~M. Pe\~na,
+\emph{Spherical Bessel functions and critical lengths},
+Revista de la Real Academia de Ciencias Exactas, F\'isicas y Naturales.
+Serie A. Matem\'aticas \textbf{117} (2023), article 29;
+published online 27 November 2022.
+\href{https://doi.org/10.1007/s13398-022-01365-8}
+{doi:10.1007/s13398-022-01365-8}.
+
+\bibitem{KounchevRender2025}
+O. Kounchev and H. Render,
+\emph{On the critical length conjecture for spherical Bessel functions in
+CAGD}, preprint (2025).
+\href{https://arxiv.org/abs/2505.09964v1}{arXiv:2505.09964v1}.
+
+\bibitem{McSwiggen2019}
+C. McSwiggen,
+\emph{A new proof of Harish-Chandra's integral formula},
+Communications in Mathematical Physics \textbf{365} (2019), 239--253.
+\href{https://doi.org/10.1007/s00220-018-3259-9}
+{doi:10.1007/s00220-018-3259-9}.
+
+\bibitem{Collins2005}
+B. Collins,
+\emph{Product of random projections, Jacobi ensembles and universality
+problems arising from free probability},
+Probability Theory and Related Fields \textbf{133} (2005), 315--344.
+\href{https://doi.org/10.1007/s00440-005-0428-5}
+{doi:10.1007/s00440-005-0428-5}.
+
+\bibitem{DLMF}
+NIST Digital Library of Mathematical Functions,
+\emph{\S10.21: Zeros of Bessel and Hankel functions},
+especially \S10.21(iv) and Eq.~10.21.32, accessed 2 November 2026.
+\url{https://dlmf.nist.gov/10.21}.
+
+\bibitem{Ideosphere2026}
+Ideosphere, \emph{Oscillatory Jacobi recurrence record},
+finite-verification snapshot dated 7 September 2026, accessed
+2 November 2026.
+\url{https://ideosphere.ai/papers/oscjacobi-rec}.
+
+\bibitem{Ashfaque2026}
+J.~M. Ashfaque,
+\emph{On the discrete Painlev\'e IV structure of oscillatory Gegenbauer
+recurrence coefficients}, preprint dated 24 July 2026, accessed
+2 November 2026.
+\href{https://www.researchgate.net/publication/410769119_On_the_Discrete_Painleve_IV_Structure_of_Oscillatory_Gegenbauer_Recurrence_Coefficients}
+{\nolinkurl{https://www.researchgate.net/publication/410769119}}.
+
+\end{thebibliography}
+\end{document}

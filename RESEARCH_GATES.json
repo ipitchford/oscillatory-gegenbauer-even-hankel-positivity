@@ -1,0 +1,163 @@
+{
+ "schemaVersion": "1.0",
+ "provenance": "Compiled 4 November 2026 for release 0.1.0-candidate from the dated novelty report (novelty_report.md, 2 November 2026), the competing-claim audit (competing_claim_audit.md) and the reference retrieval of 4 November 2026. It documents the scrutiny performed, not historical priority. No new literature search was run at release preparation.",
+ "contributionMap": [
+  {
+   "claim": "Theorem 1.1: D_{2r}^{(alpha)}(x) > 0 for all r >= 1, alpha > -1 and real x.",
+   "unit": "statement",
+   "paperLocation": "Theorem 1.1; Sections 2-4",
+   "searches": [
+    {
+     "date": "2026-11-02",
+     "corpus": "web search engines, arXiv full text, publisher pages, ResearchGate author full texts (novelty_report.md)",
+     "query": "oscillatory Gegenbauer orthogonal polynomial existence; Jacobi-type kissing polynomials; signed consecutive-derivative Bessel Wronskians; Jacobi unitary trace characteristic functions; semiclassical Pearson functionals and Hankel tau-functions; Lommel and Umemura polynomials; spherical Bessel critical lengths"
+    },
+    {
+     "date": "2026-11-04",
+     "corpus": "api.crossref.org and export.arxiv.org",
+     "query": "registry records for every bibliography entry with a DOI or arXiv identifier (refs/crossref_records.jsonl)"
+    }
+   ],
+   "closestPriorWork": "Celsus, Deano, Huybrechs and Iserles 2022, Theorem 4.3 (alpha = 0); Milovanovic, Cvetkovic and Marjanovic 2008, Theorem 2.2 (rational parameter at Bessel-zero frequencies); Barhoumi 2021 (large degree asymptotics)",
+   "verdict": "new-in-bounded-search"
+  },
+  {
+   "claim": "Continuation in alpha controlled by a Pearson identity (no common adjacent zeros, all complex zeros simple) and a large-frequency endpoint expansion uniform on compact exponent intervals.",
+   "unit": "method",
+   "paperLocation": "Lemma 2.1, Corollary 2.3, Lemmas 3.1-3.2, Proposition 3.3 (Sections 2-4)",
+   "searches": [
+    {
+     "date": "2026-11-02",
+     "corpus": "web search engines, arXiv full text, publisher pages, ResearchGate author full texts (novelty_report.md)",
+     "query": "oscillatory Gegenbauer orthogonal polynomial existence; Jacobi-type kissing polynomials; signed consecutive-derivative Bessel Wronskians; Jacobi unitary trace characteristic functions; semiclassical Pearson functionals and Hankel tau-functions; Lommel and Umemura polynomials; spherical Bessel critical lengths"
+    }
+   ],
+   "closestPriorWork": "Celsus et al. 2022 (no common adjacent zeros for alpha = 0, zero-escape control); Dimitrov and Xu 2019 (Wronskians of Fourier transforms)",
+   "verdict": "new-in-bounded-search"
+  },
+  {
+   "claim": "Exact degrees and leading coefficients of the Hankel polynomials H_n and V_n of Milovanovic, Cvetkovic and Marjanovic (2008), formal over Q(lambda), with two exceptional specialisations.",
+   "unit": "statement",
+   "paperLocation": "Theorems 5.1 and 6.1 (Sections 5-6)",
+   "searches": [
+    {
+     "date": "2026-11-02",
+     "corpus": "web search engines, arXiv full text, publisher pages, ResearchGate author full texts (novelty_report.md)",
+     "query": "oscillatory Gegenbauer orthogonal polynomial existence; Jacobi-type kissing polynomials; signed consecutive-derivative Bessel Wronskians; Jacobi unitary trace characteristic functions; semiclassical Pearson functionals and Hankel tau-functions; Lommel and Umemura polynomials; spherical Bessel critical lengths"
+    }
+   ],
+   "closestPriorWork": "Milovanovic, Cvetkovic and Marjanovic 2008 (conjectured); Lyu and Zhou 2026 (leading-product conjectures)",
+   "verdict": "new-in-bounded-search"
+  },
+  {
+   "claim": "Complete proofs of the recurrence-coefficient formulas of Lyu and Zhou (2026) Conjectures 2.5 and 2.7 in their stated ranges.",
+   "unit": "statement",
+   "paperLocation": "Theorems 7.2 and 7.4 (Section 7)",
+   "searches": [
+    {
+     "date": "2026-11-02",
+     "corpus": "web search engines, arXiv full text, publisher pages, ResearchGate author full texts (novelty_report.md)",
+     "query": "oscillatory Gegenbauer orthogonal polynomial existence; Jacobi-type kissing polynomials; signed consecutive-derivative Bessel Wronskians; Jacobi unitary trace characteristic functions; semiclassical Pearson functionals and Hankel tau-functions; Lommel and Umemura polynomials; spherical Bessel critical lengths"
+    },
+    {
+     "date": "2026-11-02",
+     "corpus": "ResearchGate, arXiv listing, Ideosphere record (competing_claim_audit.md)",
+     "query": "Lyu-Zhou Conjectures 2.5 and 2.7; discrete Painleve IV oscillatory Gegenbauer recurrence coefficients"
+    }
+   ],
+   "closestPriorWork": "Ashfaque, ResearchGate preprint of 24 July 2026: claims the formulas via a discrete Painleve IV identification; its Proposition 3.1 fails as printed (competing_claim_audit.md; manuscript Section 9)",
+   "verdict": "collision",
+   "resolution": "Earlier public claim disclosed in the abstract, introduction, Section 9, README and release page. This release claims the first complete proofs known to it, not the first claim; the positivity theorem and the 2008 degree results are not claimed there as far as read."
+  },
+  {
+   "claim": "Corollary 8.3: critical length j_{7/2,1} for span{x^j cos x, x^j sin x : 0 <= j <= 3}, conditional on the unrefereed rank-three result of Kounchev and Render (2025).",
+   "unit": "statement",
+   "paperLocation": "Section 8.3, Appendix A",
+   "searches": [
+    {
+     "date": "2026-11-02",
+     "corpus": "web search engines, arXiv full text, publisher pages, ResearchGate author full texts (novelty_report.md)",
+     "query": "oscillatory Gegenbauer orthogonal polynomial existence; Jacobi-type kissing polynomials; signed consecutive-derivative Bessel Wronskians; Jacobi unitary trace characteristic functions; semiclassical Pearson functionals and Hankel tau-functions; Lommel and Umemura polynomials; spherical Bessel critical lengths"
+    }
+   ],
+   "closestPriorWork": "Carnicer, Mainar and Pena 2023 (conjecture); Kounchev and Render 2025 (preprint)",
+   "verdict": "partially-known-cited"
+  }
+ ],
+ "sourcesReadInFull": [
+  {
+   "citation": "Celsus, Deano, Huybrechs and Iserles, The kissing polynomials and their Hankel determinants, Trans. Math. Appl. 6 (2022)",
+   "usedFor": "Base case alpha = 0 and its exact scope",
+   "readWhat": "Abstract and Section 4",
+   "date": "2026-11-02",
+   "evidenceLocator": "novelty_report.md Section 1; manuscript Section 1"
+  },
+  {
+   "citation": "Lyu and Zhou, arXiv:2607.19797v1 (2026)",
+   "usedFor": "Conjectures 2.5 and 2.7 and the 18 listed polynomials",
+   "readWhat": "Introduction, Section 2 and the listed polynomials",
+   "date": "2026-11-02",
+   "evidenceLocator": "novelty_report.md Section 3; manuscript Section 7.3"
+  },
+  {
+   "citation": "Ashfaque, ResearchGate preprint of 24 July 2026",
+   "usedFor": "Prior claim and its Proposition 3.1",
+   "readWhat": "Full text as posted",
+   "date": "2026-11-02",
+   "evidenceLocator": "competing_claim_audit.md; manuscript Section 9"
+  }
+ ],
+ "limitationTriage": [
+  {
+   "limitation": "Existence only: an even-degree polynomial need not give distinct quadrature nodes, nonzero weights or good conditioning.",
+   "closingQuestion": "Are the zeros of the even-degree polynomials simple with nonzero Christoffel weights for every alpha and x?",
+   "triedOrSearched": "Considered as an extension in the revision round (REVIEW_SUMMARY.md); not tractable then.",
+   "estimatedCost": "weeks",
+   "decision": "OPEN",
+   "cheap": false,
+   "reasonOpen": "New research.",
+   "whyNotClosedNow": "Beyond the scope of this release."
+  },
+  {
+   "limitation": "The general Carnicer-Mainar-Pena critical-length conjecture and the n >= 4 cases remain open; the n = 3 corollary depends on an unrefereed preprint.",
+   "closingQuestion": "Can the rank-three input be certified independently, and do higher odd-rank first-zero comparisons hold?",
+   "triedOrSearched": "Considered in the revision round; flagged as conditional in abstract, introduction and proof.",
+   "estimatedCost": "weeks",
+   "decision": "OPEN",
+   "cheap": false,
+   "reasonOpen": "New research.",
+   "whyNotClosedNow": "Beyond the scope of this release."
+  },
+  {
+   "limitation": "Priority holds only within a bounded search; historical priority not established.",
+   "closingQuestion": "Has even-size positivity for general alpha been published in other language?",
+   "triedOrSearched": "Dated search of 2 November 2026 (novelty_report.md); no MathSciNet/zbMATH search; no author enquiry.",
+   "estimatedCost": "days",
+   "decision": "OPEN",
+   "cheap": false,
+   "reasonOpen": "Specialist databases and correspondence are out of scope.",
+   "whyNotClosedNow": "Requires specialist review."
+  },
+  {
+   "limitation": "verify.py checks formulas and conventions at finite sizes, not the statements for all sizes.",
+   "closingQuestion": "Do the checks fail when a formula is corrupted, including under python -O?",
+   "triedOrSearched": "Explicit checks that raise (no assert); a negative control is included and passes only if the corrupted formula is rejected.",
+   "estimatedCost": "1 hour",
+   "decision": "CLOSED",
+   "cheap": true
+  }
+ ],
+ "extensionScout": {
+  "by": "Internal AI-assisted reviewers and the lead, November 2026",
+  "date": "2026-11-03",
+  "proposals": [
+   "Distinct quadrature nodes with nonzero weights",
+   "Interlacing of odd-size zeros",
+   "Critical lengths for n >= 4",
+   "Independent certificate replacing the Kounchev-Render input"
+  ],
+  "actions": [
+   "None tractable within the revision; recorded as limitations (REVIEW_SUMMARY.md)"
+  ]
+ }
+}

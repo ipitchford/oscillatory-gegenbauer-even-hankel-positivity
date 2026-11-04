@@ -1,0 +1,77 @@
+audit_date: 2026-11-02
+status: proof_complete_with_bounded_priority_uncertainty
+primary_object:
+  parameters: alpha > -1 real; z complex; N >= 0 integer
+  moments: mu_j(alpha,z) = integral_-1^1 t^j (1-t^2)^alpha exp(i*z*t) dt
+  determinant: D_N(alpha,z) = det[mu_(j+k)(alpha,z)]_(0<=j,k<N); D_0 = 1
+  bessel_transform: mu_0 = sqrt(pi)*Gamma(alpha+1)*(2/z)^(alpha+1/2)*J_(alpha+1/2)(z)
+  derivative_identity: D_N = (-1)^(N*(N-1)/2)*det[mu_0^(j+k)]_(0<=j,k<N)
+  random_matrix_identity: D_N/D_N(alpha,0) is the characteristic function of the trace of the symmetric Jacobi unitary ensemble
+claims:
+  - id: even_existence
+    statement: D_(2r)(alpha,x) > 0 for all r>=1, alpha>-1, x real
+    contribution_unit: extension of known alpha=0 theorem to all integrable real Gegenbauer exponents
+    proof_inputs: Pearson identity; Toda identity; uniform endpoint asymptotics; Celsus et al 2022 Theorem 4.3
+    outcome: BOUNDED_UNCERTAINTY
+  - id: simple_zeros
+    statement: all complex frequency zeros of every Jacobi moment determinant are simple, for real endpoint exponents greater than -1
+    contribution_unit: supporting lemma; no separate priority claim
+    outcome: BOUNDED_UNCERTAINTY
+  - id: lyu_zhou_2_5
+    statement: all four recurrence coefficient formulas in Lyu-Zhou 2026 Conjecture 2.5 hold in precisely the stated index and parameter regimes
+    contribution_unit: explicit all-index proof of a documented conjecture
+    outcome: BOUNDED_UNCERTAINTY
+    caveat: related July 2026 claim located; its printed determinant identity fails a low-index check; firstness is not established
+  - id: lyu_zhou_2_7
+    statement: all recurrence coefficient formulas in Lyu-Zhou 2026 Conjecture 2.7 hold in precisely the stated ranges
+    contribution_unit: exact lambda=0 valuation and shifted-ratio calculation using a Laguerre measure plus a unit atom
+    outcome: BOUNDED_UNCERTAINTY
+  - id: degree_conjectures
+    statement: deg_u H_n = floor(n^2/4); generic deg_u V_n = n*(n+1)/2; explicit leading coefficients and exceptional specialisations
+    contribution_unit: proof of 2008 formal degree conjectures and 2026 leading-product conjectures
+    outcome: BOUNDED_UNCERTAINTY
+  - id: cmp_index_3
+    statement: critical length of span{x^j cos x,x^j sin x:0<=j<=3} is j_(7/2,1)
+    contribution_unit: corollary of even positivity, classical orbital-integral identity, and published rank-three result
+    outcome: BRIDGE_IDENTIFIED
+  - id: irrational_exceptions
+    statement: infinitely many irrational lambda>1/2 admit a positive zero zeta of J_(lambda-1) with D_3(lambda-1/2,zeta)=0
+    contribution_unit: boundary proposition; no located named conjecture or priority guarantee
+    outcome: BOUNDED_UNCERTAINTY
+fingerprints:
+  D_1_alpha_zero: 2*sin(x)/x
+  D_2_alpha_zero: 4*(x^2-sin(x)^2)/x^4
+  D_1_at_origin_alpha_zero: 2
+  D_2_at_origin_alpha_zero: 4/3
+  D_3_at_origin_alpha_zero: 32/135
+  even_tail: D_(2r) ~ 2^(2*r*(alpha+r))*product((j!*Gamma(alpha+j+1))^2,j=0..r-1)*x^(-2*r*(alpha+r))
+  polynomial_parameters: lambda=alpha+1/2; u=zeta^2
+  P_initial: P_0=1; P_1=-2*lambda
+  P_recurrence: P_(k+2)=-(k+2*lambda+1)*P_(k+1)-u*P_k-k*u*P_(k-1)
+  H_1: 1
+  H_2: 2*lambda-u
+  H_3: 2*(2*lambda+1)*(u^2-lambda*(2*lambda+5)*u+4*lambda^2)
+  H_degrees_n_1_to_8: [0,1,2,4,6,9,12,16]
+  lambda_zero_valuation: ord_(u=0) H_n = n-1, n>=1
+  lambda_zero_reduced_degree: floor((n-2)^2/4), n>=1
+aliases_searched:
+  - oscillatory Gegenbauer orthogonal polynomial existence
+  - Jacobi-type kissing polynomials
+  - signed consecutive-derivative Bessel Wronskians
+  - Jacobi unitary trace characteristic functions
+  - Fourier correlation functions and Wiener translation density
+  - semiclassical Pearson functionals and Hankel tau-functions
+  - Karlin-Szego order-shifted Bessel determinants
+  - Lommel polynomials and Umemura polynomials
+  - spherical Bessel critical lengths and exponential-polynomial Chebyshev spaces
+exact_distinctions:
+  - positive definiteness of a function does not imply pointwise positivity
+  - derivatives in x are different from derivatives in x^2
+  - the shifted-last-column determinant is different from shifting every moment index
+  - differentiating a relation valid only at isolated Bessel zeros is invalid and is not used
+  - formal degree over Q(lambda) may drop after a parameter specialisation
+  - monic even polynomial existence alone does not prove simple quadrature nodes or numerical stability
+unresolved:
+  - full Carnicer-Mainar-Pena conjecture; higher odd-rank first-zero comparisons
+  - comprehensive historical priority
+  - external peer review
